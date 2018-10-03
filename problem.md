@@ -11,11 +11,11 @@ over computer networks. In the intervening chapters, we have developed,
 one building block at a time, the networking infrastructure needed to
 make such applications possible. We have now come full circle, back to
 network applications. These applications are part network protocol (in
-the sense that they exchange messages with their peers on other machines
+the sense that they exchange messages with their peers on other machines)
 and part traditional application program (in the sense that they
 interact with the windowing system, the file system, and ultimately the
-user). This chapter explores some of the most popular network
-applications available today.
+user). This chapter explores some popular network applications
+available today.
 
 Looking at applications drives home the *systems approach* that we have
 emphasized throughout this book. That is, the best way to build
@@ -39,7 +39,7 @@ implementer).
 We proceed by examining a variety of familiar, and not so familiar,
 network applications. These range from exchanging email and surfing the
 Web, to integrating applications across businesses, to multimedia
-applications like `vic` and `vat`, to managing a set of network
+applications like videoconferencing, to managing a set of network
 elements, to emerging peer-to-peer and content distribution networks.
 This list is by no means exhaustive, but it does serve to illustrate
 many of the key principles of designing and building applications.
