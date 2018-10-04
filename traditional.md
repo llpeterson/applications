@@ -59,10 +59,9 @@ We say "simple" because each protocol is not designed to support
 arbitrary remote procedure calls of the sort discussed in an earlier
 chapter, but is instead designed to send and respond to a specific set
 of request messages. Interestingly, the approach taken by HTTP has
-proven quite powerful, which has led to it being adopted widely in
-the *Web Services* architecture. As a consequence, one could argue
-this makes HTTP the Internet's default RPC mechanism. More on this
-topic at the end of this section.
+proven quite powerful, which has led to it being adopted widely by
+the *Web Services* architecture. More on this topic at the end of this
+section.
 
 ## Electronic Mail (SMTP, MIME, IMAP)
 
