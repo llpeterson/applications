@@ -3,7 +3,7 @@
 There are some protocols that are essential to the smooth running of the
 Internet but that don't fit neatly into the strictly layered model. One
 of these is the Domain Name System (DNS)—not an application that users
-normally invoke explicitly, but rather a service that almost all other
+normally invoke directly, but rather a service that almost all other
 applications depend upon. This is because the name service is used to
 translate host names into host addresses; the existence of such an
 application allows the users of other applications to refer to remote
@@ -57,14 +57,18 @@ hosts. Note that the Internet did not always use DNS. Early in its
 history, when there were only a few hundred hosts on the Internet, a
 central authority called the *Network Information Center* (NIC)
 maintained a flat table of name-to-address bindings; this table was
-called . Whenever a site wanted to add a new host to the Internet, the
-site administrator sent email to the NIC giving the new host's
+called `HOSTS.TXT`. Whenever a site wanted to add a new host to the
+Internet, the site administrator sent email to the NIC giving the new host's
 name/address pair. This information was manually entered into the table,
 the modified table was mailed out to the various sites every few days,
 and the system administrator at each site installed the table on every
 host at the site. Name resolution was then simply implemented by a
 procedure that looked up a host's name in the local copy of the table
 and returned the corresponding address.
+
+> Believe it or not, there was also a paper book (like a phone book)
+> published periodically that listed all the machines connected to the
+> Internet and all people that had an Internet email account.
 
 It should come as no surprise that the approach to naming did not work
 well as the number of hosts in the Internet started to grow. Therefore,
@@ -132,13 +136,11 @@ domains for each country, plus the "big six" domains: `.edu`, `.com`,
 `.gov`, `.mil`, `.org`, and `.net`. These six
 domains were all originally based in the United States (where the
 Internet and DNS were invented); for example, only U.S.-accredited
-educational institutions can register an domain name. In recent years,
-the number of top-level domains has been expanded, partly to deal with
-the high demand for domains names. The newer top-level
-domains include `.biz`, `.coop`, and `.info`. Another recent
-development has been the support of domain names
-that are represented in character sets other than the Latin alphabet,
-such as Arabic and Chinese.
+educational institutions can register an `.edu` domain name. In recent
+years, the number of top-level domains has been expanded, partly to
+deal with the high demand for `.com` domains names. The newer
+top-level domains include `.biz`, `.coop`, and `.info`. There are now
+over 1200 top-level domains.
 
 ### Name Servers
 
@@ -300,14 +302,15 @@ address, and so on. X.500 proved too cumbersome—and, in some sense,
 was usurped by powerful search engines now available on the Web—but it
 did eventually evolve into the Lightweight Directory Access Protocol
 (LDAP). LDAP is a subset of X.500 originally designed as a PC front end
-to X.500. Today, it is gaining in popularity, mostly at the enterprise
-level, as a system for learning information about users.
+to X.500. Today, widely used, mostly at the enterprise level, as a
+system for learning information about users.
 
 ### Name Resolution
 
 Given a hierarchy of name servers, we now consider the issue of how a
 client engages these servers to resolve a domain name. To illustrate the
-basic idea, suppose the client wants to resolve the name relative to the
+basic idea, suppose the client wants to resolve the name
+`penguins.cs.princeton.edu` relative to the
 set of servers given in the previous subsection. The client could first
 send a query containing this name to one of the root servers (as we'll
 see below, this rarely happens in practice but will suffice to
@@ -425,8 +428,24 @@ issue that pervades the entire network architecture. Since the nodes we
 want to keep track of are distributed, our only real option is to use
 the network to manage the network. This means we need a protocol that
 allows us to read, and possibly write, various pieces of state
-information on different network nodes. The most widely used protocol
+information on different network nodes. A widely used protocol
 for this purpose is the Simple Network Management Protocol (SNMP).
+
+> While it is true that SNMP is widely used, and was historically
+> "the" management protocol for switches and
+> routers, system admins also have to administer servers, client
+> desktop machines, and laptops. And to complicate matters even
+> more, virtualization technology has led to the proliferation of
+> virtual machines (VM), which now outnumber physical machines; admins
+> have to administer these VMs too. New management tools are being
+> invented every day to help address this challenge, but they typically
+> leverage standard protocols like HTTP to retrieve monitoring data.
+> This is a positive development in that it takes us out of the
+> business of creating new protocols and puts us in the business of
+> creating smarter and smarter management tools, many of which now
+> starting to take advantage of Artificial Intelligence to determine
+> if something is amiss. Today, SNMP is one of many sources of data
+> being used by network automation and orchestration tools.
 
 SNMP is essentially a specialized request/reply protocol that supports
 two kinds of request messages: `GET` and `SET`. The former is used

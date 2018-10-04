@@ -1,7 +1,7 @@
 # {{ page.title }}
 
-Just like the traditional applications described earlier in this
-chapter, multimedia applications such as telephony and videoconferencing
+Just like the traditional applications described in the previous section,
+multimedia applications such as telephony and videoconferencing
 need their own protocols. Much of the initial experience in designing
 protocols for multimedia applications came from the MBone
 tools—applications such as `vat` and `vic` that were developed for
@@ -253,11 +253,12 @@ behalf of callers. We can see how proxies work best through an example.
 </figure>
 
 Consider the two users in [Figure 2](#sipproxy). The first thing to
-notice is that each user has a name in the format , very much like an
-email address. When user Bruce wants to initiate a session with Larry,
-he sends his initial SIP message to the local proxy for his domain, .
-Among other things, this initial message contains a *SIP URI*—these
-are a form of uniform resource identifier which look like this:
+notice is that each user has a name in the format `user@domain`, very
+much like an email address. When user Bruce wants to initiate a
+session with Larry, he sends his initial SIP message to the local
+proxy for his domain, `cisco.com`. Among other things, this initial
+message contains a *SIP URI*—these are a form of uniform resource
+identifier which look like this:
 
 ```pseudo
 SIP:larry@princeton.edu
@@ -293,8 +294,9 @@ Content-Length: 142
 ```
 
 The first line identifies the type of function to be performed
-(`invite`); the resource on which to perform it, the called party ( );
-and the protocol version (2.0). The subsequent header lines probably
+(`invite`); the resource on which to perform it, the called party
+(`sip:larry@princeton.edu` ); and the protocol version (2.0). The
+subsequent header lines probably
 look somewhat familiar because of their resemblance to the header lines
 in an email message. SIP defines a large number of header fields, only
 some of which we describe here. Note that the header in this example
@@ -308,11 +310,12 @@ Note that the field in SIP provides the capability to use any protocol
 for this purpose, although SDP is the most common.
 
 Returning to the example, when the `invite` message arrives at the
-proxy, not only does the proxy forward the message on toward , but it
-also responds to the sender of the `invite`. Just as in HTTP, all
-responses have a response code, and the organization of codes is similar
-to that for HTTP. In [Figure 3](#sipeg) we can see a sequence of SIP
-messages and responses.
+proxy, not only does the proxy forward the message on toward
+`princeton.edu`, but it also responds to the sender of the
+`invite`. Just as in HTTP, all responses have a response code, and the
+organization of codes is similar to that for HTTP. In
+[Figure 3](#sipeg) we can see a sequence of SIP messages and
+responses.
 
 <figure class="line">
 	<a id="sipeg"></a>
@@ -320,52 +323,57 @@ messages and responses.
 	<figcaption>Message flow for a basic SIP session.</figcaption>
 </figure>
 
-The first response message in this figure is the provisional response ,
-which indicates that the message was received without error by the
-caller's proxy. Once the `invite` is delivered to Larry's phone, it
-alerts Larry and responds with a message. The arrival of this message at
-Bruce's computer is a sign that it can generate a "ringtone." Assuming
-Larry is willing and able to communicate with Bruce, he could pick up
-his phone, causing the message to be sent. Bruce's computer responds
-with an `ACK`, and media (e.g., an RTP-encapsulated audio stream) can
-now begin to flow between the two parties. Note that at this point the
-parties know each others' addresses, so the `ACK` can be sent
-directly, bypassing the proxies. The proxies are now no longer involved
-in the call. Note that the media will therefore typically take a
-different path through the network than the original signalling
-messages. Furthermore, even if one or both of the proxies were to crash
-at this point, the call could continue on normally. Finally, when one
-party wishes to end the session, it sends a `BYE` message, which
-elicits a response under normal circumstances.
+The first response message in this figure is the provisional response
+`100 trying`, which indicates that the message was received without
+error by the caller's proxy. Once the `invite` is delivered to Larry's
+phone, it alerts Larry and responds with a `180 ringing` message. The
+arrival of this message at Bruce's computer is a sign that it can
+generate a "ringtone." Assuming Larry is willing and able to
+communicate with Bruce, he could pick up his phone, causing the
+message `200 OK` to be sent. Bruce's computer responds with an `ACK`,
+and media (e.g., an RTP-encapsulated audio stream) can now begin to
+flow between the two parties. Note that at this point the parties know
+each others' addresses, so the `ACK` can be sent directly, bypassing
+the proxies. The proxies are now no longer involved in the call. Note
+that the media will therefore typically take a different path through the
+network than the original signalling messages. Furthermore, even if
+one or both of the proxies were to crash at this point, the call could
+continue on normally. Finally, when one party wishes to end the
+session, it sends a `BYE` message, which elicits a `200 OK` response
+under normal circumstances.
 
 There are a few details that we have glossed over. One is the
 negotiation of session characteristics. Perhaps Bruce would have liked
 to communicate using both audio and video but Larry's phone only
 supports audio. Thus, Larry's phone would send an SDP message in its
-describing the properties of the session that will be acceptable to
-Larry and the device, considering the options that were proposed in
-Bruce's `invite`. In this way, mutually acceptable session parameters
-are agreed to before the media flow starts.
+`200 OK` describing the properties of the session that will be
+acceptable to Larry and the device, considering the options that were
+proposed in Bruce's `invite`. In this way, mutually acceptable session
+parameters are agreed to before the media flow starts.
 
 The other big issue we have glossed over is that of locating the correct
 device for Larry. First, Bruce's computer had to send its `invite` to
-the proxy. This could have been a configured piece of information in the
-computer, or it could have been learned by DHCP. Then the proxy had to
-find the proxy. This could be done using a special sort of DNS lookup
-that would return the IP address of the SIP proxy for the domain. (We'll
-discuss how DNS can do this in the next section.) Finally, the proxy had
-to find a device on which Larry could be contacted. Typically, a proxy
-server has access to a location database that can be populated in
-several ways. Manual configuration is one option, but a more flexible
-option is to use the *registration* capabilities of SIP.
+the `cisco.com` proxy. This could have been a configured piece of
+information in the computer, or it could have been learned by
+DHCP. Then the `cisco.com` proxy had to find the `princeton.ed`
+proxy. This could be done using a special sort of DNS lookup that
+would return the IP address of the SIP proxy for the domain. (We'll
+discuss how DNS can do this in the next section.) Finally, the
+`princeton.ed` proxy had to find a device on which Larry could be
+contacted. Typically, a proxy server has access to a location database
+that can be populated in several ways. Manual configuration is one
+option, but a more flexible option is to use the *registration*
+capabilities of SIP.
 
 A user can register with a location service by sending a SIP
 `register` message to the "registrar" for his domain. This message
 creates a binding between an "address of record" and a "contact
 address." An "address of record" is likely to be a SIP URI that is the
-well-known address for the user (e.g., ) and the "contact address" will
-be the address at which the user can currently be found (e.g., ). This
-is exactly the binding that was needed by the proxy in our example.
+well-known address for the user (e.g., `sip:larry@princeton.edu`) and
+the "contact address" will be the address at which the user can
+currently be found (e.g., `sip:larry@llp-ph.cs.princeton.edu`). This
+is exactly the binding that was needed by the proxy `princeton.edu` in
+our example.
 
 Note that a user may register at several locations and that multiple
 users may register at a single device. For example, one can imagine a
@@ -379,7 +387,7 @@ nothing to do with telephony. For example, SIP supports operations that
 enable a call to be routed to a "music-on-hold" server or a voicemail
 server. It is also easy to see how it could be used for applications
 like instant messaging, and standardization of SIP extensions for such
-purposes is ongoing at the time of writing.
+purposes is ongoing.
 
 ### H.323
 

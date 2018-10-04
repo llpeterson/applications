@@ -8,12 +8,12 @@ servers, which then respond accordingly. We refer to these as
 that have existed since the early days of computer networks (although
 the Web is a lot newer than email but has its roots in file transfers
 that predated it). By contrast, later sections will look at a class of
-applications that have become feasible only relatively recently:
-streaming applications (e.g., multimedia applications like video and
-audio) and various overlay-based applications. (Note that there is a bit
-of a blurring between these classes, as you can of course get access to
-streaming multimedia data over the Web, but for now we'll focus on the
-general usage of the Web to request pages, images, etc.)
+applications that have become popular more recently: streaming
+applications (e.g., multimedia applications like video and audio) and
+various overlay-based applications. (Note that there is a bit
+of a blurring between these classes, as you can of course get access
+to streaming multimedia data over the Web, but for now we'll focus on
+the general usage of the Web to request pages, images, etc.)
 
 Before taking a close look at each of these applications, there are
 three general points that we need to make. The first is that it is
@@ -38,10 +38,18 @@ protocols:
 - HyperText Transport Protocol (HTTP) is used to communicate between
    web browsers and web servers.
 
-We'll also look at how custom application protocols are defined in the
-*Web Services* architecture.
+Second, we observe that many application layer protocols, including 
+HTTP and SMTP, have a companion protocol that specifies the format of 
+the data that can be exchanged. This is one reason WHY these protocols 
+are relatively simple: Much of the complexity is managed in this 
+companion standard. For example, SMTP is a protocol for exchanging 
+electronic mail messages, but RFC 822 and Multipurpose Internet Mail 
+Extensions (MIME) define the format of email messages. Similarly, HTTP 
+is a protocol for fetching Web pages, but HyperText Markup Language 
+(HTML) is a companion specification that defines the basic form of those 
+pages. 
 
-The second point is that, since the application protocols described in
+Finally, since the application protocols described in
 this section follow the same request/reply communication pattern, you
 might expect that they would be built on top of a Remote Procedure Call
 (RPC) transport protocol. This is not the case, however, as they are
@@ -50,33 +58,27 @@ simple RPC-like mechanism on top of a reliable transport protocol (TCP).
 We say "simple" because each protocol is not designed to support
 arbitrary remote procedure calls of the sort discussed in an earlier
 chapter, but is instead designed to send and respond to a specific set
-of request messages.
-
-Finally, we observe that many application layer protocols, including
-HTTP and SMTP, have a companion protocol that specifies the format of
-the data that can be exchanged. This is one reason WHY these protocols
-are relatively simple: Much of the complexity is managed in this
-companion document. For example, SMTP is a protocol for exchanging
-electronic mail messages, but RFC 822 and Multipurpose Internet Mail
-Extensions (MIME) define the format of email messages. Similarly, HTTP
-is a protocol for fetching Web pages, but HyperText Markup Language
-(HTML) is a companion specification that defines the basic form of those
-pages.
+of request messages. Interestingly, the approach taken by HTTP has
+proven quite powerful, which has led to it being adopted widely in
+the *Web Services* architecture. As a consequence, one could argue
+this makes HTTP the Internet's default RPC mechanism. More on this
+topic at the end of this section.
 
 ## Electronic Mail (SMTP, MIME, IMAP)
 
 Email is one of the oldest network applications. After all, what could
 be more natural than wanting to send a message to the user at the other
-end of a cross-country link you just managed to get running?
+end of a cross-country link you just managed to get running? It's the
+20th century's version of "*Mr. Watson, come here... I want to see you.*"
 Surprisingly, the pioneers of the ARPANET had not really envisioned
 email as a key application when the network was created—remote access
 to computing resources was the main design goal—but it turned out to
-be a useful application that continues to be extremely popular.
+be the Internet's original killer app.
 
 As noted above, it is important (1) to distinguish the user interface
 (i.e., your mail reader) from the underlying message transfer protocols
 (such as SMTP or IMAP), and (2) to distinguish between this transfer
-protocol and a companion protocol (RFC 822 and MIME) that defines the
+protocol and a companion standard (RFC 822 and MIME) that defines the
 format of the messages being exchanged. We start by looking at the
 message format.
 
@@ -90,7 +92,7 @@ data. This data is still represented as ASCII text, but because it may
 be an encoded version of, say, a JPEG image, it's not necessarily
 readable by human users. More on MIME in a moment.
 
-The message header is a series of <CRLF>-terminated lines. (<CRLF>
+The message header is a series of `<CRLF>`-terminated lines. (`<CRLF>`
 stands for carriage-return plus line-feed, which are a pair of ASCII
 control characters often used to indicate the end of a line of text.)
 The header is separated from the message body by a blank line. Each
@@ -256,12 +258,13 @@ recipient does not want to include the specific host on which he or she
 reads email in his or her address. Another is scale: In large
 organizations, it's often the case that a number of different machines
 hold the *mailboxes* for the organization. For example, mail delivered
-to is first sent to a mail gateway in the CS Department at Princeton
-(that is, to the host named ), and then forwarded—involving a second
+to `bob@cs.princeton.edu` is first sent to a mail gateway in the CS
+Department at Princeton (that is, to the host named
+`cs.princeton.edu`), and then forwarded—involving a second
 connection—to the specific machine on which Bob has a mailbox. The
-forwarding gateway maintains a database that maps users into the machine
-on which their mailbox resides; the sender need not be aware of this
-specific name. (The list of header lines in the message will help you
+forwarding gateway maintains a database that maps users into the
+machine on which their mailbox resides; the sender need not be aware
+of this specific name. (The list of header lines in the message will help you
 trace the mail gateways that a given message traversed.) Yet another
 reason, particularly true in the early days of email, is that the
 machine that hosts any given user's mailbox may not always be up or
@@ -279,11 +282,10 @@ SMTP is also ASCII based. This means it is possible for a human at a
 keyboard to pretend to be an SMTP client program.
 
 SMTP is best understood by a simple example. The following is an
-exchange between sending host and receiving host . In this case, user
-Bob at Princeton is trying to send mail to users Alice and Tom at Cisco.
-The lines sent by are shown in black and the lines sent by are shown in
-teal. Extra blank lines have been added to make the dialog more
-readable.
+exchange between sending host `cs.princeton.edu` and receiving host
+`cisco.com` . In this case, user Bob at Princeton is trying to send
+mail to users Alice and Tom at Cisco. Extra blank lines have been
+added to make the dialog more readable.
 
 ```shell
 HELO cs.princeton.edu
@@ -333,7 +335,8 @@ a user's email address, but without actually sending a message to the
 user.
 
 The only other point of interest is the arguments to the `MAIL` and
-`RCPT` operations; for example, and , respectively. These look a lot
+`RCPT` operations; for example, `FROM:<Bob@cs.princeton.edu>` and
+`TO:<Alice@cisco.com>`, respectively. These look a lot
 like 822 header fields, and in some sense they are. What actually
 happens is that the mail daemon parses the message to extract the
 information it needs to run SMTP. The information it extracts is said to
@@ -341,9 +344,10 @@ form an *envelope* for the message. The SMTP client uses this envelope
 to parameterize its exchange with the SMTP server. One historical note:
 The reason `sendmail` became so popular is that no one wanted to
 reimplement this message parsing function. While today's email addresses
-look pretty tame (e.g., ), this was not always the case. In the days
-before everyone was connected to the Internet, it was not uncommon to
-see email addresses of the form .
+look pretty tame (e.g., `Bob@cs.princeton.edu`), this was not always
+the case. In the days before everyone was connected to the Internet,
+it was not uncommon to see email addresses of the form
+`user%host@site!neighbor`.
 
 ### Mail Reader
 
@@ -362,12 +366,12 @@ consider IMAP, in particular.
 
 IMAP is similar to SMTP in many ways. It is a client/server protocol
 running over TCP, where the client (running on the user's desktop
-machine) issues commands in the form of -terminated ASCII text lines and
-the mail server (running on the machine that maintains the user's
-mailbox) responds in kind. The exchange begins with the client
+machine) issues commands in the form of `<CRLF>`-terminated ASCII text
+lines and the mail server (running on the machine that maintains the
+user's mailbox) responds in kind. The exchange begins with the client
 authenticating him- or herself and identifying the mailbox he or she
 wants to access. This can be represented by the simple state transition
-diagram shown in [Figure 2](#imap). In this diagram, , and
+diagram shown in [Figure 2](#imap). In this diagram, `LOGIN` and
 `LOGOUT` are example commands that the client can issue, while `OK`
 is one possible server response. Other common commands include and
 `EXPUNGE`, with the obvious meanings. Additional server responses
@@ -442,8 +446,9 @@ http://www.cs.princeton.edu/index.html
 ```
 
 If you opened that particular URL, your web browser would open a TCP
-connection to the web server at a machine called and immediately
-retrieve and display the file called . Most files on the Web contain
+connection to the web server at a machine called
+`www.cs.princeton.edu` and immediately retrieve and display the file
+called `index.html`. Most files on the Web contain
 images and text, and many have other objects such as audio and video
 clips, pieces of code, etc. They also frequently include URLs that point
 to other files that may be located on other machines, which is the core
@@ -634,7 +639,7 @@ strictly speaking they are not *locators* because they don't tell you
 how to locate something; they just provide a globally unique identifier
 for the namespace. There is no requirement that you can retrieve
 anything at the URI given as the target namespace of an XML document.
-We'll see another example of a URI that is not a URL in a later section
+We'll see another example of a URI that is not a URL in a later section.
 
 ### TCP Connections
 
@@ -698,8 +703,8 @@ connections more than offset the drawbacks.
 
 ### Caching
 
-One of the most active areas of research (and entrepreneurship) in the
-Internet today is how to effectively cache Web pages. Caching has many
+An important implementation strategy that makes the web more usable
+is to cache Web pages. Caching has many
 benefits. From the client's perspective, a page that can be retrieved
 from a nearby cache can be displayed much more quickly than if it has to
 be fetched from across the world. From the server's perspective, having
@@ -749,7 +754,7 @@ CDNs—which are effectively distributed caches—in a later section.
 
 ## Web Services
 
-So far we have focused on interactions between a human and a machine.
+So far we have focused on interactions between a human and a web server.
 For example, a human uses a web browser to interact with a server, and
 the interaction proceeds in response to input from the user (e.g., by
 clicking on links). However, there is increasing demand for direct
@@ -809,8 +814,8 @@ architectures are called *Web Services*, taking their name from the term
 for the individual applications that offer a remotely accessible service
 to client applications to form network applications. The terms used
 as informal shorthand to distinguish the two Web Services architectures
-are *SOAP* and *REST* (as in, "the SOAP vs. REST debate"). We will
-discuss the technical meanings of those terms shortly.
+are *SOAP* and *REST*. We will discuss the technical meanings of those
+terms shortly.
 
 > The name *Web Services* is unfortunately so generic sounding that 
 > many mistakenly assume that it includes any sort of service 
@@ -833,13 +838,6 @@ procedural or operation-oriented style of invoking a remote service.
 REST advocates argue, however, that rich services can nonetheless be
 exposed using a more data-oriented or document-passing style for which
 HTTP is well suited.
-
-Although both architectures are being actively adopted, they are still
-new enough that we don't yet have much empirical data about their
-real-world use. One architecture may come to dominate, or they may merge
-in some way, or we may find that one architecture is better suited to
-certain kinds of applications while the other architecture is better for
-others.
 
 ### Custom Application Protocols (WSDL, SOAP)
 
@@ -1065,7 +1063,7 @@ specifies how to use various existing techniques such as X.509 public
 key certificatesand Kerberos to provide security features in SOAP
 protocols.
 
-2.5pt plus1pt minus1pt WS-Security is just the first of a growing suite
+WS-Security is just the first of a growing suite
 of SOAP-level standards established by the industry consortium OASIS
 (Organization for the Advancement of Structured Information Standards).
 The standards known collectively as *WS-*\* include WS-Reliability,

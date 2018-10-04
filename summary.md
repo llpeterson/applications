@@ -9,10 +9,10 @@ protocols, such as SIP and H.323, which are used to control multimedia
 applications such as Voice over IP. In addition to these application
 protocols, we looked at some critical supporting protocols: the DNS
 protocol used by the Domain Naming System and SNMP used to query remote
-nodes for the sake of network management. Finally, we looked at emerging
-applications—including overlay, peer-to-peer, and content distribution
-networks—that blend application processing and packet forwarding in
-innovative ways.
+nodes for the sake of network management. Finally, we looked at a
+class of applications—including overlay, peer-to-peer, and content
+distribution networks—that blend application processing and packet
+forwarding in yinnovative ways.
 
 Application protocols are a curious lot. In many ways, the traditional
 client/server applications are like another layer of transport protocol,

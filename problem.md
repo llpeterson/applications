@@ -17,8 +17,8 @@ interact with the windowing system, the file system, and ultimately the
 user). This chapter explores some popular network applications
 available today.
 
-Looking at applications drives home the *systems approach* that we have
-emphasized throughout this book. That is, the best way to build
+Looking at applications drives home the *systems approach* that we
+have emphasized throughout this book. That is, the best way to build
 effective networked applications is to understand the building blocks
 that a network can provide and how those blocks can interact with each
 other. Thus, for example, a particular networked application might need

@@ -141,6 +141,15 @@ problem: Starting with a fully connected graph representing the
 Internet, the goal is to find the embedded multicast tree that spans all
 the group members.
 
+> There is a simpler version of this problem, enabled by the ready
+> availability of cloud-hosted VMs around the world. The
+> multicast-aware "end systems" can be VMs running at multiple
+> sites. As these sites are well-known and relatively fixed, it's
+> possible to construct a static multicast tree in the cloud, and have
+> the actual end-hosts simply connect to the nearest cloud location.
+> But for the sake of completeness, the following describes the
+> approach in its full glory.
+
 <figure class="line">
 	<a id="topology"></a>
 	<img src="figures/f09-21-9780123850591.png" width="400px"/>
@@ -315,14 +324,14 @@ thereby allowing you to select the best possible route at any moment in
 time.
 
 An experimental overlay, called the Resilient Overlay Network (RON),
-does exactly this. RON scales to only a few dozen nodes because it uses
+did exactly this. RON scaled to only a few dozen nodes because it used
 an $$n \times n$$ strategy of closely monitoring (via active probes) three
 aspects of path quality—latency, available bandwidth, and loss
-probability—between every pair of sites. It is then able to both
+probability—between every pair of sites. It was then able to both
 select the optimal route between any pair of nodes, and rapidly change
-routes should network conditions change. Experience shows that RON is
-able to deliver modest performance improvements to applications, but
-more importantly, it recovers from network failures much more quickly.
+routes should network conditions change. Experience showed that RON
+was able to deliver modest performance improvements to applications,
+but more importantly, it recoverd from network failures much more quickly.
 For example, during one 64-hour period in 2001, an instance of RON
 running on 12 nodes detected 32 outages lasting over 30 minutes, and it
 was able to recover from all of them in less than 20 seconds on average.
@@ -330,17 +339,20 @@ This experiment also suggested that forwarding data through just one
 intermediate node is usually sufficient to recover from Internet
 failures.
 
-Since RON is not designed to be a scalable approach, it is not possible
+Since RON was not designed to be a scalable approach, it is not possible
 to use RON to help random host A communicate with random host B; A and B
 have to know ahead of time that they are likely to communicate and then
 join the same RON. However, RON seems like a good idea in certain
 settings, such as when connecting a few dozen corporate sites spread
 across the Internet or allowing you and 50 of your friends to establish
-your own private overlay for the sake of running some application. The
+your own private overlay for the sake of running some
+application. (Today, this idea is put to practice with the marketing
+name *Software-Defined WAN*, or *SD-WAN*.) The
 real question, though, is what happens when everyone starts to run their
 own RON. Does the overhead of millions of RONs aggressively probing
-paths swamp the network, and does anyone see improved behavior when many
-RONs compete for the same paths? These questions are still unanswered.
+paths swamp the network, and does anyone see improved behavior when
+many RONs compete for the same paths? These questions are still
+unanswered.
 
 All of these overlays illustrate a concept that is central to computer
 networks in general: *virtualization*. That is, it is possible to build
@@ -466,8 +478,8 @@ consider next.
 
 ### Structured Overlays
 
-At the same time file sharing systems have been fighting to fill the
-void left by Napster, the research community has been exploring an
+At the same time file sharing systems started fighting to fill the
+void left by Napster, the research community began to explore an
 alternative design for peer-to-peer networks. We refer to these networks
 as *structured*, to contrast them with the essentially random
 (unstructured) way in which a Gnutella network evolves. Unstructured
@@ -576,8 +588,7 @@ the nodes in the network.
 [Figure 8](#locate) illustrates what happens for a simple 28-bit ID
 space. To keep the discussion as concrete as possible, we consider the
 approach used by a particular peer-to-peer network called *Pastry*.
-Other systems work in a similar manner. (See the papers cited at the end
-of the chapter for additional examples.)
+Other systems work in a similar manner.
 
 Suppose you are at the node with id `65a1fc` (hex) and you are trying to
 locate the object with ID `d46a1c`. You realize that your ID shares
@@ -877,13 +888,13 @@ We have already seen how HTTP running over TCP allows web browsers to
 retrieve pages from web servers. However, anyone who has waited an
 eternity for a Web page to return knows that the system is far from
 perfect. Considering that the backbone of the Internet is now
-constructed from OC-192 (10-Gbps) links, it's not obvious why this
+constructed from 40-Gbps links, it's not obvious why this
 should happen. It is generally agreed that when it comes to downloading
 Web pages there are four potential bottlenecks in the system:
 
 - *The first mile.* The Internet may have high-capacity links in it,
     but that doesn't help you download a Web page any faster when you're
-    connected by a 56-Kbps modem or a poorly performing 3G wireless
+    connected by a 1.5Mbps DSL line or a poorly performing wireless
     link.
 
 - *The last mile.* The link that connects the server to the Internet
