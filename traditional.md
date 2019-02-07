@@ -727,9 +727,10 @@ on a single TCP connection. This goes beyond what version 1.1
 supports—allowing a *sequence* of requests to reuse a TCP
 connection—by permitting these requests to overlap with each
 other. The way HTTP/2 does this should sound familiar: it defines a
-*concurrent channel* abstraction (technically, the channels are called
-*streams*), with one request/reply pair active on any given channel at
-a time.
+*channel* abstraction (technically, the channels are called
+*streams*), permits multiple concurrent streams to be active at a
+given time (each labled with a unique *stream id*), and limits each
+stream to one active request/reply exchange at a time.
 
 ### Caching
 
