@@ -703,32 +703,33 @@ but today it is widely accepted that the benefits of persistent
 connections more than offset the drawbacks.
 
 While 1.1 is still the most widely supported version of HTTP, a new
-version (2.0) was formally approved by the IETF in 2015. Know simply
-as HTTP/2, the new version is backwards compatible with 1.1 (i.e,. it
+version (2.0) was formally approved by the IETF in 2015. Known as
+HTTP/2, the new version is backwards compatible with 1.1 (i.e,. it
 adopts the same syntax for header fields, status codes, and URIs), but
-it adds two main features.
+it adds two new features.
 
 The first is to make it easier for web servers to *minify* the information
 they send back to web browsers. If you look closely at the makeup of
 the HTML in a typical web page, you will find a plethora of references
 to other bits-and-pieces (e.g., images, scripts, style files) that the
-browser will need to render the page. Rather than force the client to
+browser needs to render the page. Rather than force the client to
 request these bits-and-pieces (technically known as *resources*) in
 subsequent requests, HTTP/2 provides a means for the server to bundle
 the required resources and proactively *push* them to the client
-without incurring the round-trip delay of requesting them. This
-feature is coupled with a compression mechanism that reduces the
-number of bytes that need to be pushed. The whole goal is to minimize
-the latency an end-user experiences from the moment they click on a
-hyperlink until the selected page is fully rendered.
+without incurring the round-trip delay of forcing the client to
+request them. This feature is coupled with a compression mechanism
+that reduces the number of bytes that need to be pushed. The whole
+goal is to minimize the latency an end-user experiences from the
+moment they click on a hyperlink until the selected page is fully rendered.
 
 The second big advance of HTTP/2 is to multiplex several requests
 on a single TCP connection. This goes beyond what version 1.1
 supports—allowing a *sequence* of requests to reuse a TCP
 connection—by permitting these requests to overlap with each
-other. The way HTTP/2 does this should look familiar: it defines a set
-of concurrent *channels* (or *streams*), with one request/reply pair
-active on any given channel at a time.
+other. The way HTTP/2 does this should sound familiar: it defines a
+*concurrent channel* abstraction (technically, the channels are called
+*streams*), with one request/reply pair active on any given channel at
+a time.
 
 ### Caching
 
@@ -1198,12 +1199,13 @@ a difference? It depends.
 Moving a server process from a physical machine running in my machine
 room into a virtual machine running in a cloud provider's datacenter
 shifts responsibility for keeping the machine running from my system
-admin to the cloud provider's operations team, but the process is
+admin to the cloud provider's operations team, but the application is
 still designed according to the Web Services architecture. On the
 other hand, if the application is designed from scratch to run on a
 scalable cloud platform, for example by adhering to the
 *micro-services architecture*, then we say the application is *cloud
-native*.
+native*. So the important distinction is cloud native versus legacy web
+services deployed in the cloud.
 
 We briefly saw the micro-services architecture in Chapter 5 when
 describing gRPC, and although it's difficult to definitively declare
