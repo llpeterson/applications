@@ -60,8 +60,9 @@ arbitrary remote procedure calls of the sort discussed in an earlier
 chapter, but is instead designed to send and respond to a specific set
 of request messages. Interestingly, the approach taken by HTTP has
 proven quite powerful, which has led to it being adopted widely by
-the *Web Services* architecture. More on this topic at the end of this
-section.
+the *Web Services* architecture, with general RPC mechanisms built *on
+top of HTTP* rather than the other way around. More on this topic at
+the end of this section.
 
 ## Electronic Mail (SMTP, MIME, IMAP)
 
@@ -666,18 +667,19 @@ establishment and termination.
 </figure>
 
 To overcome this situation, HTTP version 1.1 introduced *persistent
-connections*—the client and server can exchange multiple request/
-response messages over the same TCP connection. Persistent connections
-have many advantages. First, they obviously eliminate the connection
-setup overhead, thereby reducing the load on the server, the load on the
-network caused by the additional TCP packets, and the delay perceived by
-the user. Second, because a client can send multiple request messages
-down a single TCP connection, TCP's congestion window mechanism is able
-to operate more efficiently. This is because it's not necessary to go
-through the slow start phase for each page. [Figure 5](#persist) shows
-the transaction from [Figure 4](#oldhttp) using a persistent connection
-in the case where the connection is already open (presumably due to some
-prior access of the same server).
+connections*—the client and server can exchange multiple
+request/response messages over the same TCP connection. Persistent
+connections have many advantages. First, they obviously eliminate the
+connection setup overhead, thereby reducing the load on the server,
+the load on the network caused by the additional TCP packets, and the
+delay perceived by the user. Second, because a client can send
+multiple request messages down a single TCP connection, TCP's
+congestion window mechanism is able to operate more efficiently. This
+is because it's not necessary to go through the slow start phase for
+each page. [Figure 5](#persist) shows the transaction from
+[Figure 4](#oldhttp) using a persistent connection in the case where
+the connection is already open (presumably due to some prior access of
+the same server).
 
 <figure class="line">
 	<a id="persist"></a>
@@ -699,6 +701,34 @@ before it is fully terminated.) Concerns about this added complexity may
 be one reason why persistent connections were not used from the outset,
 but today it is widely accepted that the benefits of persistent
 connections more than offset the drawbacks.
+
+While 1.1 is still the most widely supported version of HTTP, a new
+version (2.0) was formally approved by the IETF in 2015. Know simply
+as HTTP/2, the new version is backwards compatible with 1.1 (i.e,. it
+adopts the same syntax for header fields, status codes, and URIs), but
+it adds two main features.
+
+The first is to make it easier for web servers to *minify* the information
+they send back to web browsers. If you look closely at the makeup of
+the HTML in a typical web page, you will find a plethora of references
+to other bits-and-pieces (e.g., images, scripts, style files) that the
+browser will need to render the page. Rather than force the client to
+request these bits-and-pieces (technically known as *resources*) in
+subsequent requests, HTTP/2 provides a means for the server to bundle
+the required resources and proactively *push* them to the client
+without incurring the round-trip delay of requesting them. This
+feature is coupled with a compression mechanism that reduces the
+number of bytes that need to be pushed. The whole goal is to minimize
+the latency an end-user experiences from the moment they click on a
+hyperlink until the selected page is fully rendered.
+
+The second big advance of HTTP/2 is to multiplex several requests
+on a single TCP connection. This goes beyond what version 1.1
+supports—allowing a *sequence* of requests to reuse a TCP
+connection—by permitting these requests to overlap with each
+other. The way HTTP/2 does this should look familiar: it defines a set
+of concurrent *channels* (or *streams*), with one request/reply pair
+active on any given channel at a time.
 
 ### Caching
 
@@ -1155,3 +1185,31 @@ accessible via *both* of the Web Services architectures, and according
 to some reports a substantial majority of developers use the REST
 interface. Of course, this is just one data point and may well reflect
 factors specific to Amazon.
+
+### From Web Services to Cloud Services
+
+If Web Services is what we call it when the web server that implements
+my application sends a request to the web server that implements your
+application, then what do we call it when we both put our applications in
+the cloud so that they can support scalable workloads? We can call both of
+them *Cloud Services* if we want to, but is that a distinction without
+a difference? It depends.
+
+Moving a server process from a physical machine running in my machine
+room into a virtual machine running in a cloud provider's datacenter
+shifts responsibility for keeping the machine running from my system
+admin to the cloud provider's operations team, but the process is
+still designed according to the Web Services architecture. On the
+other hand, if the application is designed from scratch to run on a
+scalable cloud platform, for example by adhering to the
+*micro-services architecture*, then we say the application is *cloud
+native*.
+
+We briefly saw the micro-services architecture in Chapter 5 when
+describing gRPC, and although it's difficult to definitively declare
+micro-services superior to web services, the current trend in industry
+almost certainly favors the former. More interesting, perhaps, is the
+ongoing debate about REST+Json versus gRPC+Protbufs as the preferred
+RPC mechanism for implementing micro-services. Keeping in mind that
+both run on top of HTTP, we leave it as an exercise for the reader to
+pick a side and defend it.
