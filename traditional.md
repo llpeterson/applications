@@ -424,13 +424,13 @@ One helpful way to think of the Web is as a set of cooperating clients
 and servers, all of whom speak the same language: HTTP. Most people are
 exposed to the Web through a graphical client program or web browser
 like Safari, Chrome, Firefox, or Internet Explorer.
-[Figure 3](#netscape) shows the Firefox browser in use, displaying a
+[Figure 3](#netscape) shows the Safari browser in use, displaying a
 page of information from Princeton University.
 
 <figure class="line">
 	<a id="netscape"></a>
-	<img src="figures/f09-03-9780123850591.png" width="500px"/>
-	<figcaption>The Firefox web browser.</figcaption>
+	<img src="figures/browser-screenshot.png" width="600px"/>
+	<figcaption>The Safari web browser.</figcaption>
 </figure>
 
 Clearly, if you want to organize information into a system of linked
