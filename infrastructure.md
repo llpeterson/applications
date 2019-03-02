@@ -560,8 +560,8 @@ structure.
 > replace the MIB with a new standard for what status information
 > various types of device can report. The leading candidate is
 > YANG, which stands for *Yet Another Next Generation*, a name
-> chosen to poke fun at the fact that it's different than YAML (*Yet
-> Another Markup Language*), both of which are vairants of XML.
+> chosen to poke fun at the fact that it's different than YAML (*YAML
+> Ain't Markup Language*), both of which are vairants of XML.
 > What's important is the data model that defines the semantics of
 > the variables being reported, where one of the advantages of YANG
 > over the MIB is that it makes the data model programmable, and
