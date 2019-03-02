@@ -432,20 +432,26 @@ information on different network nodes. A widely used protocol
 for this purpose is the Simple Network Management Protocol (SNMP).
 
 > While it is true that SNMP is widely used, and was historically
-> "the" management protocol for switches and
-> routers, system admins also have to administer servers, client
-> desktop machines, and laptops. And to complicate matters even
-> more, virtualization technology has led to the proliferation of
-> virtual machines (VM), which now outnumber physical machines; admins
-> have to administer these VMs too. New management tools are being
-> invented every day to help address this challenge, but they typically
-> leverage standard protocols like HTTP to retrieve monitoring data.
-> This is a positive development in that it takes us out of the
+> "the" management protocol for switches and routers, system admins
+> also have to administer servers, client desktop machines, and
+> laptops. And to complicate matters even more, virtualization
+> technology has led to the proliferation of virtual machines (VM),
+> which now outnumber physical machines; admins have to administer
+> these VMs too. New management tools are being invented to
+> help address this challenge, but they typically leverage standard
+> protocols like HTTP. This is a positive
+> development for two reasons. One is that it takes us out of the
 > business of creating new protocols and puts us in the business of
-> creating smarter and smarter management tools, many of which now
-> starting to take advantage of Artificial Intelligence to determine
-> if something is amiss. Today, SNMP is one of many sources of data
-> being used by network automation and orchestration tools.
+> creating smarter management tools, many of which now starting to
+> take advantage of Artificial Intelligence to determine if something is
+> amiss. A second is that it has shifted the focus from mostly
+> retreiving device status (assuming a human uses what he or she
+> learns to manully log into the device to issue this or that command),
+> to also programmatically *configuring* the device. The bottom line is
+> that SNMP now is one of many sources of data being used by network
+> automation and orchestration tools, with many different
+> organizations now working to reestablish industry-wide norms for how
+> this is done.
 
 SNMP is essentially a specialized request/reply protocol that supports
 two kinds of request messages: `GET` and `SET`. The former is used
@@ -548,3 +554,25 @@ returns the value of that variable plus the ID of the next variable, for
 example, the next item in the table or the next field in the structure.
 This aids the client in "walking through" the elements of a table or
 structure.
+
+> In the same way HTTP is starting to replace SNMP as the protocol
+> for talking to network devices, there is a parallel effort to
+> replace the MIB with a new standard for what status information
+> various types of device can report. The leading candidate is
+> YANG, which stands for *Yet Another Next Generation*, a name
+> chosen to poke fun at the fact that it's different than YAML (*Yet
+> Another Markup Language*), both of which are vairants of XML.
+> What's important is the data model that defines the semantics of
+> the variables being reported, where one of the advantages of YANG
+> over the MIB is that it makes the data model programmable, and
+> hence, easier to adapt. Although this is currently an active area of
+> work, and there are multiple contenders, one of the most promising
+> efforts to stanardize on network device monitoring and configuration
+> is called *OpenConfig*. It defines a set of data models for network
+> devices, plus a ProtoBuf-based specification for how an operator
+> manages devices using gRPC, which you may recall, runs on top of
+> HTTP. Because we don't have enough acroynms, this particular
+> application of gRPC is called gNMI (*gRPC Network Management
+> Interface*).
+
+
