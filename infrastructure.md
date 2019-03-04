@@ -407,11 +407,11 @@ are involved and in terms of the suite of protocols that can be running
 on any one node. Even if you restrict yourself to worrying about the
 nodes within a single administrative domain, such as a campus, there
 might be dozens of routers and hundreds—or even thousands—of hosts
-to keep track of. Probably even more virtual machines. If you think
-about all the state that is maintained and manipulated on any one of
-those nodes—address translation tables, routing tables, TCP connection
-state, and so on—then it is easy to become overwhelmed by the prospect
-of having to manage all of this information.
+to keep track of. If you think about all the state that is maintained
+and manipulated on any one of those nodes—address translation tables,
+routing tables, TCP connection state, and so on—then it is easy to
+become overwhelmed by the prospect of having to manage all of this
+information.
 
 It is easy to imagine wanting to know about the state of various
 protocols on different nodes. For example, you might want to monitor the
@@ -428,7 +428,7 @@ issue that pervades the entire network architecture. Since the nodes we
 want to keep track of are distributed, our only real option is to use
 the network to manage the network. This means we need a protocol that
 allows us to read and write various pieces of state information on
-different network nodes.
+different network nodes. The following describes two approaches.
 
 ### SNMP
 
@@ -539,12 +539,11 @@ elements of a table or structure.
 
 SNMP is still widely used and has historically been "the" management
 protocol for switches and routers, but there has recently been growing
-attention paid to how we manage networks, with several new proposals
-being put forward. There isn't yet complete agreement on an
-industry-wide standard, but a conensus about the general approach is
-starting to emerge. We describe one example, called *OpenConfig*, that
-is both getting a lot of traction and illustrates many of the key idea
-that the are being pursued.
+attention paid to more flexible and powerful ways to manage networks.
+There isn't yet complete agreement on an industry-wide standard, but a
+conensus about the general approach is starting to emerge. We describe
+one example, called *OpenConfig*, that is both getting a lot of
+traction and illustrates many of the key idea that the are being pursued.
 
 The general strategy is to automate network management as much as
 possible, with the goal of getting the error-prone human out of the
@@ -563,13 +562,13 @@ Second, whereas historically the operator had to configure each
 network device individually, all the devices have to be configured in
 a consistent way if they are going to function correctly as a network.
 As a consequence, zero-touch also implies that the operator should be
-able to express their global *intent*, with the mangement tool being
-smart enough to issue the necessary per-device configuration
+able to declare their network-wide *intent*, with the mangement tool
+being smart enough to issue the necessary per-device configuration
 directives in a globally consistent way.
 
 <figure class="line">
 	<a id="mgmt"></a>
-	<img src="figures/apps/Slide1.png" width="500px"/>
+	<img src="figures/apps/Slide1.png" width="400px"/>
 	<figcaption>Operator manages a network through a configuration and
 	managment tool, which in turn programmatically interacts with the
 	underlying network devices (e.g., using gNMI and YANG).</figcaption>
@@ -581,9 +580,10 @@ true zero-touch operation is still more aspirational than reality. But
 progress is being made. For example, new management tools are starting
 to leverage standard protocols like HTTP to monitor and configure
 network devices. This is a positive step because it gets us out of the
-business of creating new protocols and let's us focus on creating
-smarter management tools, perhaps by taking advantage of Machine
-Learning algorithms to determine if something is amiss.
+business of creating yet another request/reply protocols and let's us
+focus on creating smarter management tools, perhaps by taking
+advantage of Machine Learning algorithms to determine if something is
+amiss.
 
 In the same way HTTP is starting to replace SNMP as the protocol
 for talking to network devices, there is a parallel effort to replace
@@ -591,8 +591,8 @@ the MIB with a new standard for what status information various
 types of devices can report, *plus* what configuration information
 those same devices are able to respond to. Agreeing to a single
 standard for configuration is inherently challenging because every
-vendor claims their device is a unicorn: unlike the feature-free device
-their competitors sell. (That is to say, the challenge is not entirely
+vendor claims their device is a unicorn, unlike the devices their
+competitors sell. (That is to say, the challenge is not entirely
 technical.)
 
 The general approach is to allow each device
@@ -603,11 +603,13 @@ candidate is YANG, which stands for *Yet Another Next Generation*, a
 name chosen to poke fun at the fact that it's different than YAML
 (*YAML Ain't Markup Language*), both of which are vairants of XML.
 What's important is the data model that defines the semantics of
-the variables available to be read and written. It's not entirely a
-free-for-all since the network operators that buy network hardware
-have a strong incentive to push the models for similar devices towards
-convergence, but YANG makes the process of creating and using
-models more programmable, and hence, adaptable.
+the variables available to be read and written in a programatic form
+(i.e., it's not just text in a standards specification). It's not a
+free-for-all with each vendor defining a unique model since the
+network operators that buy network hardware have a strong incentive to
+drive the models for similar devices towards convergence. YANG makes
+the process of creating, using, and modifying models more
+programmable, and hence, adaptable to this process.
 
 As mentioned earlier, this is currently an active area of work, with
 OpenConfig being one of the contenders. OpenConfig uses YANG
@@ -617,7 +619,7 @@ specification for how a management tool communicates with devices
 using gRPC (which you may recall, runs on top of HTTP). Because we
 don't have enough acroynms, this particular application of gRPC is
 called gNMI (*gRPC Network Management Interface*). As depicted in
-[Figure 6](#mgmt), gRPC is intended as a standard management interface
+[Figure 6](#mgmt), gNMI is intended as a standard management interface
 for network devices. What's not standardized is the richness of the
 management tool's ability to automate, or the exact form of the
 operator-facing interface. Like any application that is trying to
