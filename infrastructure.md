@@ -11,11 +11,11 @@ hosts by name rather than by address. In other words, a name service is
 usually used by other applications, rather than by humans.
 
 A second critical function is network management, which although not so
-familiar to the average user, is the operation performed most often by
-system administrators. Network management is widely considered one of
-the hard problems of networking and continues to be the focus of much
-research. We'll look at some of the issues and approaches to the problem
-below.
+familiar to the average user, is performed most often by the people
+that operate the network on behalf of users. Network management is
+widely considered one of the hard problems of networking and continues
+to be the focus of much innovation. We'll look at some of the issues and
+approaches to the problem below.
 
 ## Name Service (DNS)
 
@@ -377,7 +377,7 @@ names before sending out a query.
 <figure class="line">
 	<a id="resolution"></a>
 	<img src="figures/f09-18-9780123850591.png" width="600px"/>
-	<figcaption>Name resolution in practice, where the numbers 1 to 10
+	<figcaption>Name resolution in practice, where the numbers 1 to 10 
 	show the sequence of steps in the process.</figcaption>
 </figure>
 
@@ -400,7 +400,7 @@ next hop might be the ultimate destination or it might be an
 intermediate router. Frames sent over the physical network have these
 physical addresses in their headers.
 
-## Network Management (SNMP)
+## Network Management (SNMP, OpenConfig)
 
 A network is a complex system, both in terms of the number of nodes that
 are involved and in terms of the suite of protocols that can be running
@@ -410,7 +410,7 @@ might be dozens of routers and hundreds—or even thousands—of hosts
 to keep track of. If you think about all the state that is maintained
 and manipulated on any one of those nodes—address translation tables,
 routing tables, TCP connection state, and so on—then it is easy to
-become depressed about the prospect of having to manage all of this
+become overwhelmed by the prospect of having to manage all of this
 information.
 
 It is easy to imagine wanting to know about the state of various
@@ -428,43 +428,24 @@ issue that pervades the entire network architecture. Since the nodes we
 want to keep track of are distributed, our only real option is to use
 the network to manage the network. This means we need a protocol that
 allows us to read, and possibly write, various pieces of state
-information on different network nodes. A widely used protocol
-for this purpose is the Simple Network Management Protocol (SNMP).
+information on different network nodes.
 
-> While it is true that SNMP is widely used, and was historically
-> "the" management protocol for switches and routers, system admins
-> also have to administer servers, client desktop machines, and
-> laptops. And to complicate matters even more, virtualization
-> technology has led to the proliferation of virtual machines (VM),
-> which now outnumber physical machines; admins have to administer
-> these VMs too. New management tools are being invented to
-> help address this challenge, but they typically leverage standard
-> protocols like HTTP. This is a positive
-> development for two reasons. One is that it takes us out of the
-> business of creating new protocols and puts us in the business of
-> creating smarter management tools, many of which now starting to
-> take advantage of Artificial Intelligence to determine if something is
-> amiss. A second is that it has shifted the focus from mostly
-> retreiving device status (assuming a human uses what he or she
-> learns to manully log into the device to issue this or that command),
-> to also programmatically *configuring* the device. The bottom line is
-> that SNMP now is one of many sources of data being used by network
-> automation and orchestration tools, with many different
-> organizations now working to reestablish industry-wide norms for how
-> this is done.
+### SNMP
 
-SNMP is essentially a specialized request/reply protocol that supports
-two kinds of request messages: `GET` and `SET`. The former is used
-to retrieve a piece of state from some node, and the latter is used to
-store a new piece of state in some node. (SNMP also supports a third
-operation, , which we explain below.) The following discussion focuses
-on the `GET` operation, since it is the one most frequently used.
+A widely used protocol for network management is SNMP (*Simple Network
+Management Protocol*). SNMP is essentially a specialized request/reply
+protocol that supports two kinds of request messages: `GET` and
+`SET`. The former is used to retrieve a piece of state from some node,
+and the latter is used to store a new piece of state in some node.
+(SNMP also supports a third operation, , which we explain below.)
+The following discussion focuses on the `GET` operation, since
+it is the one most frequently used.
 
-SNMP is used in the obvious way. A system administrator interacts with a
+SNMP is used in the obvious way. An operator interacts with a
 client program that displays information about the network. This client
 program usually has a graphical interface. You can think of this
 interface as playing the same role as a web browser. Whenever the
-administrator selects a certain piece of information that he or she
+operator selects a certain piece of information that he or she
 wants to see, the client program uses SNMP to request that information
 from the node in question. (SNMP runs on top of UDP.) An SNMP server
 running on that node receives the request, locates the appropriate piece
@@ -511,9 +492,8 @@ example:
 - UDP—Information about UDP traffic, including the total number of
    UDP datagrams that have been sent and received.
 
-There are also groups for Internet Control Message Protocol (ICMP),
-Exterior Gateway Protocol (EGP), and SNMP itself. The tenth group is
-used by different media.
+There are also groups for Internet Control Message Protocol (ICMP)
+and SNMP itself. The tenth group is used by different media.
 
 Returning to the issue of the client stating exactly what information it
 wants to retrieve from a node, having a list of MIB variables is only
@@ -555,24 +535,93 @@ example, the next item in the table or the next field in the structure.
 This aids the client in "walking through" the elements of a table or
 structure.
 
-> In the same way HTTP is starting to replace SNMP as the protocol
-> for talking to network devices, there is a parallel effort to
-> replace the MIB with a new standard for what status information
-> various types of device can report. The leading candidate is
-> YANG, which stands for *Yet Another Next Generation*, a name
-> chosen to poke fun at the fact that it's different than YAML (*YAML
-> Ain't Markup Language*), both of which are vairants of XML.
-> What's important is the data model that defines the semantics of
-> the variables being reported, where one of the advantages of YANG
-> over the MIB is that it makes the data model programmable, and
-> hence, easier to adapt. Although this is currently an active area of
-> work, and there are multiple contenders, one of the most promising
-> efforts to stanardize on network device monitoring and configuration
-> is called *OpenConfig*. It defines a set of data models for network
-> devices, plus a ProtoBuf-based specification for how an operator
-> manages devices using gRPC, which you may recall, runs on top of
-> HTTP. Because we don't have enough acroynms, this particular
-> application of gRPC is called gNMI (*gRPC Network Management
-> Interface*).
+### OpenConfig
+
+SNMP is still widely used and has historically been "the" management
+protocol for switches and routers, but there has recently been growing
+attention paid to how we manage networks, with new proposals being put
+forward as to the right approach. There isn't yet complete agreement
+on an industry-wide standard, but a conensus about the general
+approach is starting to emerge. We describe one example, called
+*OpenConfig*, that is both getting a lot of traction and illustrates
+many of the key idea that the are being pursued.
+
+The general strategy is to automate network management as much as
+possible, with the goal of getting the error-prone human out of the
+loop. This is sometimes called *zero-touch* operation, and it
+implies two things have to happen. First, whereas historically
+the operator used tools like SNMP to *monitor* the network, but had
+to log into any mishaving network device and use a command line
+interface (CLI) to fix the problem, zero-touch operation implies that
+we also need to *configure* the network programatically. In other
+words, network management is equal parts reading status information
+and writing configuation information. The goal is to build a closed
+feedback loop, although there will always be a fallback scenario where
+the operator has to be alerted that manual intervention is required.
+
+Second, whereas historically the operator had to configure each
+network device individually, all the devices have to be configured in
+a consistent way if they are going to function correctly as a network.
+As a consequence, zero-touch typically also implies that the operator
+should be able to express their global *intent*, with the mangement
+tool being smart enough to issue the necessary per-device
+configuration directives in a globally consistent way.
+
+<figure class="line">
+	<a id="mgmt"></a>
+	<img src="figures/apps/Slide1.png" width="500px"/>
+	<figcaption>Operator manages a network through a configuration and
+	managment tool, which in turn programmatically interacts with the
+	underlying network devices (e.g., using gNMI and YANG).</figcaption>
+</figure>
+
+[Figure 6](#mgmt) gives a high-level depiction of this idealized
+approach to network management. We say "idealized" because achieving
+true zero-touch operation is still more aspirational than reality. But
+progress is being made. For example, new management tools are starting
+to leverage standard protocols like HTTP to monitor and configure
+network devices. This is a positive step because it gets us out of the
+business of creating new protocols and let's us focus on creating
+smarter management tools, perhaps by taking advantage of Aritifical
+Intelligence to determine if something is amiss.
+
+In the same way HTTP is starting to replace SNMP as the protocol
+for talking to network devices, there is a parallel effort to replace
+the MIB with a new standard for what status information various
+types of devices can report, *plus* what configuration information
+those same devices are able to react to. Agreeing to a single standard
+for configuration is inherently challenging because every vendor
+claims their device is a unicorn: unlike the "primitive" device their
+competitors sell. (That is to say, the challenge is not entirely
+technical.)
+
+The general approach is to allow each device
+manufacturer to publish a *data model* that specificies the
+configuration knobs (and available monitoring data) for its product,
+and limit standardization to the modeling language. The leading
+candidate is YANG, which stands for *Yet Another Next Generation*, a
+name chosen to poke fun at the fact that it's different than YAML
+(*YAML Ain't Markup Language*), both of which are vairants of XML.
+What's important is the data model that defines the semantics of
+the variables available to be read and written. It's not entirely a
+free-for-all since the network operators that buy network hardware
+have a strong incentive to push the models for similar devices towards
+convergence, but YANG makes the process of creating and using
+models more programmable, and hence, adaptable.
+
+As mentioned earlier, this is currently an active area of work, with
+OpenConfig being one of the contenders. OpenConfig uses YANG
+as its modeling language (around which it has established a process
+for driving the industry towards common models), plus a ProtoBuf-based
+specification for how a management tool communicates with devices
+using gRPC, which you may recall, runs on top of HTTP. Because we
+don't have enough acroynms, this particular application of gRPC is
+called gNMI (*gRPC Network Management Interface*), as depicted in
+[Figure 6](#mgmt). What's not standardized is the richness of the
+tool's ability to automate, or the exact form of the operator-facing
+interface. Like any application that is trying to serve a need and
+support more features than all the alternatives, there is still much
+room for innovation in tools for network management.
+
 
 
