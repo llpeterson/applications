@@ -407,11 +407,11 @@ are involved and in terms of the suite of protocols that can be running
 on any one node. Even if you restrict yourself to worrying about the
 nodes within a single administrative domain, such as a campus, there
 might be dozens of routers and hundreds—or even thousands—of hosts
-to keep track of. If you think about all the state that is maintained
-and manipulated on any one of those nodes—address translation tables,
-routing tables, TCP connection state, and so on—then it is easy to
-become overwhelmed by the prospect of having to manage all of this
-information.
+to keep track of. Probably even more virtual machines. If you think
+about all the state that is maintained and manipulated on any one of
+those nodes—address translation tables, routing tables, TCP connection
+state, and so on—then it is easy to become overwhelmed by the prospect
+of having to manage all of this information.
 
 It is easy to imagine wanting to know about the state of various
 protocols on different nodes. For example, you might want to monitor the
@@ -427,8 +427,8 @@ What we have just described is the problem of network management, an
 issue that pervades the entire network architecture. Since the nodes we
 want to keep track of are distributed, our only real option is to use
 the network to manage the network. This means we need a protocol that
-allows us to read, and possibly write, various pieces of state
-information on different network nodes.
+allows us to read and write various pieces of state information on
+different network nodes.
 
 ### SNMP
 
@@ -437,8 +437,8 @@ Management Protocol*). SNMP is essentially a specialized request/reply
 protocol that supports two kinds of request messages: `GET` and
 `SET`. The former is used to retrieve a piece of state from some node,
 and the latter is used to store a new piece of state in some node.
-(SNMP also supports a third operation, , which we explain below.)
-The following discussion focuses on the `GET` operation, since
+ (SNMP also supports a third operation, `GET-NEXT`, which we explain
+ below.) The following discussion focuses on the `GET` operation, since
 it is the one most frequently used.
 
 SNMP is used in the obvious way. An operator interacts with a
@@ -460,7 +460,7 @@ on a companion specification called the *management information base*
 (MIB). The MIB defines the specific pieces of information—the MIB
 *variables*—that you can retrieve from a network node.
 
-The current version of MIB, called MIB-II, organizes variables into 10
+The current version of MIB, called MIB-II, organizes variables into
 different *groups*. You will recognize that most of the groups
 correspond to one of the protocols described in this book, and nearly
 all of the variables defined for each group should look familiar. For
@@ -493,7 +493,7 @@ example:
    UDP datagrams that have been sent and received.
 
 There are also groups for Internet Control Message Protocol (ICMP)
-and SNMP itself. The tenth group is used by different media.
+and SNMP itself.
 
 Returning to the issue of the client stating exactly what information it
 wants to retrieve from a node, having a list of MIB variables is only
@@ -529,43 +529,43 @@ sends back to the client.
 
 There is one final detail. Many of the MIB variables are either tables
 or structures. Such compound variables explain the reason for the SNMP
-operation. This operation, when applied to a particular variable ID,
-returns the value of that variable plus the ID of the next variable, for
-example, the next item in the table or the next field in the structure.
-This aids the client in "walking through" the elements of a table or
-structure.
+`GET-NEXT` operation. This operation, when applied to a particular
+variable ID, returns the value of that variable plus the ID of the
+next variable, for example, the next item in the table or the next
+field in the structure. This aids the client in "walking through" the
+elements of a table or structure.
 
 ### OpenConfig
 
 SNMP is still widely used and has historically been "the" management
 protocol for switches and routers, but there has recently been growing
-attention paid to how we manage networks, with new proposals being put
-forward as to the right approach. There isn't yet complete agreement
-on an industry-wide standard, but a conensus about the general
-approach is starting to emerge. We describe one example, called
-*OpenConfig*, that is both getting a lot of traction and illustrates
-many of the key idea that the are being pursued.
+attention paid to how we manage networks, with several new proposals
+being put forward. There isn't yet complete agreement on an
+industry-wide standard, but a conensus about the general approach is
+starting to emerge. We describe one example, called *OpenConfig*, that
+is both getting a lot of traction and illustrates many of the key idea
+that the are being pursued.
 
 The general strategy is to automate network management as much as
 possible, with the goal of getting the error-prone human out of the
 loop. This is sometimes called *zero-touch* operation, and it
 implies two things have to happen. First, whereas historically
-the operator used tools like SNMP to *monitor* the network, but had
+operators used tools like SNMP to *monitor* the network, but had
 to log into any mishaving network device and use a command line
 interface (CLI) to fix the problem, zero-touch operation implies that
 we also need to *configure* the network programatically. In other
 words, network management is equal parts reading status information
 and writing configuation information. The goal is to build a closed
-feedback loop, although there will always be a fallback scenario where
-the operator has to be alerted that manual intervention is required.
+control loop, although there will always be scenarios where the
+operator has to be alerted that manual intervention is required.
 
 Second, whereas historically the operator had to configure each
 network device individually, all the devices have to be configured in
 a consistent way if they are going to function correctly as a network.
-As a consequence, zero-touch typically also implies that the operator
-should be able to express their global *intent*, with the mangement
-tool being smart enough to issue the necessary per-device
-configuration directives in a globally consistent way.
+As a consequence, zero-touch also implies that the operator should be
+able to express their global *intent*, with the mangement tool being
+smart enough to issue the necessary per-device configuration
+directives in a globally consistent way.
 
 <figure class="line">
 	<a id="mgmt"></a>
@@ -582,17 +582,17 @@ progress is being made. For example, new management tools are starting
 to leverage standard protocols like HTTP to monitor and configure
 network devices. This is a positive step because it gets us out of the
 business of creating new protocols and let's us focus on creating
-smarter management tools, perhaps by taking advantage of Aritifical
-Intelligence to determine if something is amiss.
+smarter management tools, perhaps by taking advantage of Machine
+Learning algorithms to determine if something is amiss.
 
 In the same way HTTP is starting to replace SNMP as the protocol
 for talking to network devices, there is a parallel effort to replace
 the MIB with a new standard for what status information various
 types of devices can report, *plus* what configuration information
-those same devices are able to react to. Agreeing to a single standard
-for configuration is inherently challenging because every vendor
-claims their device is a unicorn: unlike the "primitive" device their
-competitors sell. (That is to say, the challenge is not entirely
+those same devices are able to respond to. Agreeing to a single
+standard for configuration is inherently challenging because every
+vendor claims their device is a unicorn: unlike the feature-free device
+their competitors sell. (That is to say, the challenge is not entirely
 technical.)
 
 The general approach is to allow each device
@@ -614,14 +614,13 @@ OpenConfig being one of the contenders. OpenConfig uses YANG
 as its modeling language (around which it has established a process
 for driving the industry towards common models), plus a ProtoBuf-based
 specification for how a management tool communicates with devices
-using gRPC, which you may recall, runs on top of HTTP. Because we
+using gRPC (which you may recall, runs on top of HTTP). Because we
 don't have enough acroynms, this particular application of gRPC is
-called gNMI (*gRPC Network Management Interface*), as depicted in
-[Figure 6](#mgmt). What's not standardized is the richness of the
-tool's ability to automate, or the exact form of the operator-facing
-interface. Like any application that is trying to serve a need and
-support more features than all the alternatives, there is still much
-room for innovation in tools for network management.
-
-
+called gNMI (*gRPC Network Management Interface*). As depicted in
+[Figure 6](#mgmt), gRPC is intended as a standard management interface
+for network devices. What's not standardized is the richness of the
+management tool's ability to automate, or the exact form of the
+operator-facing interface. Like any application that is trying to
+serve a need and support more features than the alternatives, there is
+still much room for innovation in tools for network management.
 
