@@ -598,7 +598,7 @@ their competitors sell. (That is to say, the challenge is not entirely
 technical.)
 
 The general approach is to allow each device manufacturer to publish a
-*data model* that specificies the configuration knobs (and available
+*data model* that specifies the configuration knobs (and available
 monitoring data) for its product, and limit standardization to the
 modeling language. The leading candidate is YANG, which stands for
 *Yet Another Next Generation*, a name chosen to poke fun at how often
