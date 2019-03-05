@@ -571,7 +571,9 @@ directives in a globally consistent way.
 	<img src="figures/apps/Slide1.png" width="400px"/>
 	<figcaption>Operator manages a network through a configuration and
 	managment tool, which in turn programmatically interacts with the
-	underlying network devices (e.g., using gNMI and YANG).</figcaption>
+	underlying network devices (e.g., using gNMI as the transport
+	protocol and YANG to specify the schema for the data being
+	exchanged).</figcaption>
 </figure>
 
 [Figure 6](#mgmt) gives a high-level depiction of this idealized
@@ -619,15 +621,37 @@ process.
 
 This is where OpenConfig comes in. It uses YANG as its modeling
 language, but has also established a process for driving the industry
-towards common models). OpenConfig also adopts a ProtoBuf-based
-specification for how a management tool communicates with devices
-using gRPC (which you may recall, runs on top of HTTP). Because we
-don't have enough acroynms, this particular application of gRPC is
-called gNMI (*gRPC Network Management Interface*). As depicted in
+towards common models. OpenConfig is officially agnostic as to the
+RPC mechanism used to communicate with network devices, but one
+approach it is actively pursuing is called gNMI (*gRPC Network
+Management Interface*). As you might guess from its name, gNMI
+uses gRPC, which you may recall, runs on top of HTTP. This means
+gNMI also adopts ProtoBufs as the way it specifies the data actually
+communicated over the HTTP connection. Thus,  as depicted in
 [Figure 6](#mgmt), gNMI is intended as a standard management interface
 for network devices. What's not standardized is the richness of the
 management tool's ability to automate, or the exact form of the
 operator-facing interface. Like any application that is trying to
 serve a need and support more features than the alternatives, there is
 still much room for innovation in tools for network management.
+
+> For completeness, we note that NETCONF is another of the post-SNMP
+> protocols for communicating configuation information to network
+> devices. OpenConfig works with NETCONF, but our reading of the
+> tea leaves points to gNMI as the future.
+
+We conclude by emphasizing that a seachange is underway. While
+listing SNMP and OpenConfig in the title to this section suggests
+they are equivalent, its more accurate to say that each is "what we
+call" these two approaches, but the approaches are quite different.
+On the one hand, SNMP is really just a transport protocol, analogous
+to gNMI in the OpenConfig world. It historically enabled monitoring
+devices, but had virtually nothing to say about configuring devices.
+(The latter has historically required manual intervention.) On the
+other hand, OpenConfig is primarily an effort to define a common set
+of data models for network devices, roughly similar to the role MIB
+plays in the SNMP world, except OpenConfig is (1) model-based, using
+YANG, and (2) equally focused on monitoring and configuation.
+
+
 
