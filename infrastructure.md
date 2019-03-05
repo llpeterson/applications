@@ -580,7 +580,7 @@ true zero-touch operation is still more aspirational than reality. But
 progress is being made. For example, new management tools are starting
 to leverage standard protocols like HTTP to monitor and configure
 network devices. This is a positive step because it gets us out of the
-business of creating yet another request/reply protocols and let's us
+business of creating yet another request/reply protocol and let's us
 focus on creating smarter management tools, perhaps by taking
 advantage of Machine Learning algorithms to determine if something is
 amiss.
@@ -591,30 +591,35 @@ the MIB with a new standard for what status information various
 types of devices can report, *plus* what configuration information
 those same devices are able to respond to. Agreeing to a single
 standard for configuration is inherently challenging because every
-vendor claims their device is a unicorn, unlike the devices their
-competitors sell. (That is to say, the challenge is not entirely
+vendor claims their device is a unicorn, unlike any of the devices
+their competitors sell. (That is to say, the challenge is not entirely
 technical.)
 
-The general approach is to allow each device
-manufacturer to publish a *data model* that specificies the
-configuration knobs (and available monitoring data) for its product,
-and limit standardization to the modeling language. The leading
-candidate is YANG, which stands for *Yet Another Next Generation*, a
-name chosen to poke fun at the fact that it's different than YAML
-(*YAML Ain't Markup Language*), both of which are vairants of XML.
-What's important is the data model that defines the semantics of
-the variables available to be read and written in a programatic form
-(i.e., it's not just text in a standards specification). It's not a
-free-for-all with each vendor defining a unique model since the
-network operators that buy network hardware have a strong incentive to
-drive the models for similar devices towards convergence. YANG makes
-the process of creating, using, and modifying models more
-programmable, and hence, adaptable to this process.
+The general approach is to allow each device manufacturer to publish a
+*data model* that specificies the configuration knobs (and available
+monitoring data) for its product, and limit standardization to the
+modeling language. The leading candidate is YANG, which stands for
+*Yet Another Next Generation*, a name chosen to poke fun at how often
+a do-over proves necessary. YANG can be viewed as a restricted version
+of XSD, which you may recall is a language for defining a schema
+(model) for XML. That is, YANG defines the structure of the data. But
+unlike XSD, YANG is not XML-specific. It can instead be used in
+conjunction with different over-the-wire message formats, including
+XML, but also ProtoBufs and JSON.
 
-As mentioned earlier, this is currently an active area of work, with
-OpenConfig being one of the contenders. OpenConfig uses YANG
-as its modeling language (around which it has established a process
-for driving the industry towards common models), plus a ProtoBuf-based
+What's important about going in this direction is that the data model
+that defines the semantics of the variables available to be read and
+written in a programatic form (i.e., it's not just text in a standards
+specification). It's not a free-for-all with each vendor defining a
+unique model since the network operators that buy network hardware
+have a strong incentive to drive the models for similar devices
+towards convergence. YANG makes the process of creating, using, and
+modifying models more programmable, and hence, adaptable to this
+process.
+
+This is where OpenConfig comes in. It uses YANG as its modeling
+language, but has also established a process for driving the industry
+towards common models). OpenConfig also adopts a ProtoBuf-based
 specification for how a management tool communicates with devices
 using gRPC (which you may recall, runs on top of HTTP). Because we
 don't have enough acroynms, this particular application of gRPC is
