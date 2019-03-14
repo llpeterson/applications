@@ -547,11 +547,11 @@ traction and illustrates many of the key idea that the are being pursued.
 
 The general strategy is to automate network management as much as
 possible, with the goal of getting the error-prone human out of the
-loop. This is sometimes called *zero-touch* operation, and it
+loop. This is sometimes called *zero-touch* management, and it
 implies two things have to happen. First, whereas historically
 operators used tools like SNMP to *monitor* the network, but had
 to log into any mishaving network device and use a command line
-interface (CLI) to fix the problem, zero-touch operation implies that
+interface (CLI) to fix the problem, zero-touch management implies that
 we also need to *configure* the network programatically. In other
 words, network management is equal parts reading status information
 and writing configuation information. The goal is to build a closed
@@ -578,7 +578,7 @@ directives in a globally consistent way.
 
 [Figure 6](#mgmt) gives a high-level depiction of this idealized
 approach to network management. We say "idealized" because achieving
-true zero-touch operation is still more aspirational than reality. But
+true zero-touch management is still more aspirational than reality. But
 progress is being made. For example, new management tools are starting
 to leverage standard protocols like HTTP to monitor and configure
 network devices. This is a positive step because it gets us out of the
