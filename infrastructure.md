@@ -541,9 +541,9 @@ SNMP is still widely used and has historically been "the" management
 protocol for switches and routers, but there has recently been growing
 attention paid to more flexible and powerful ways to manage networks.
 There isn't yet complete agreement on an industry-wide standard, but a
-conensus about the general approach is starting to emerge. We describe
+consensus about the general approach is starting to emerge. We describe
 one example, called *OpenConfig*, that is both getting a lot of
-traction and illustrates many of the key idea that the are being pursued.
+traction and illustrates many of the key ideas that are being pursued.
 
 The general strategy is to automate network management as much as
 possible, with the goal of getting the error-prone human out of the
@@ -582,7 +582,7 @@ true zero-touch management is still more aspirational than reality. But
 progress is being made. For example, new management tools are starting
 to leverage standard protocols like HTTP to monitor and configure
 network devices. This is a positive step because it gets us out of the
-business of creating yet another request/reply protocol and let's us
+business of creating yet another request/reply protocol and lets us
 focus on creating smarter management tools, perhaps by taking
 advantage of Machine Learning algorithms to determine if something is
 amiss.
@@ -611,7 +611,7 @@ XML, but also ProtoBufs and JSON.
 
 What's important about going in this direction is that the data model
 that defines the semantics of the variables available to be read and
-written in a programatic form (i.e., it's not just text in a standards
+written in a programmatic form (i.e., it's not just text in a standards
 specification). It's not a free-for-all with each vendor defining a
 unique model since the network operators that buy network hardware
 have a strong incentive to drive the models for similar devices
