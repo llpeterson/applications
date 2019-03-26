@@ -381,24 +381,25 @@ names before sending out a query.
 	show the sequence of steps in the process.</figcaption>
 </figure>
 
-Just to make sure we are clear, we have now seen three different levels
-of identifiers—domain names, IP addresses, and physical network
-addresses—and the mapping of identifiers at one level into identifiers
-at another level happens at different points in the network
-architecture. First, users specify domain names when interacting with
-the application. Second, the application engages DNS to translate this
-name into an IP address; it is the IP address that is placed in each
-datagram, not the domain name. (As an aside, this translation process
-involves IP datagrams being sent over the Internet, but these datagrams
-are addressed to a host that runs a name server, not to the ultimate
-destination.) Third, IP does forwarding at each router, which often
-means that it maps one IP address into another; that is, it maps the
-ultimate destination's address into the address for the next hop router.
-Finally, IP engages the Address Resolution Protocol (ARP) to translate
-the next hop IP address into the physical address for that machine; the
-next hop might be the ultimate destination or it might be an
-intermediate router. Frames sent over the physical network have these
-physical addresses in their headers.
+> [!Note|style:flat|label:Key Takeaway|iconVisibility:hidden]
+> Just to make sure we are clear, we have now seen three different levels
+> of identifiers—domain names, IP addresses, and physical network
+> addresses—and the mapping of identifiers at one level into identifiers
+> at another level happens at different points in the network
+> architecture. First, users specify domain names when interacting with
+> the application. Second, the application engages DNS to translate this
+> name into an IP address; it is the IP address that is placed in each
+> datagram, not the domain name. (As an aside, this translation process
+> involves IP datagrams being sent over the Internet, but these datagrams
+> are addressed to a host that runs a name server, not to the ultimate
+> destination.) Third, IP does forwarding at each router, which often
+> means that it maps one IP address into another; that is, it maps the
+> ultimate destination's address into the address for the next hop router.
+> Finally, IP engages the Address Resolution Protocol (ARP) to translate
+> the next hop IP address into the physical address for that machine; the
+> next hop might be the ultimate destination or it might be an
+> intermediate router. Frames sent over the physical network have these
+> physical addresses in their headers.
 
 ## Network Management (SNMP, OpenConfig)
 

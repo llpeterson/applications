@@ -354,14 +354,15 @@ paths swamp the network, and does anyone see improved behavior when
 many RONs compete for the same paths? These questions are still
 unanswered.
 
-All of these overlays illustrate a concept that is central to computer
-networks in general: *virtualization*. That is, it is possible to build
-a virtual network from abstract (logical) resources on top of a physical
-network constructed from physical resources. Moreover, it is possible to
-stack these virtualized networks on top of each other and for multiple
-virtual network to coexist at the same level. Each virtual network, in
-turn, provides new capabilities that are of value to some set of users,
-applications, or higher-level networks.
+> [!Note|style:flat|label:Key Takeaway|iconVisibility:hidden]
+> All of these overlays illustrate a concept that is central to computer
+> networks in general: *virtualization*. That is, it is possible to build
+> a virtual network from abstract (logical) resources on top of a physical
+> network constructed from physical resources. Moreover, it is possible to
+> stack these virtualized networks on top of each other and for multiple
+> virtual network to coexist at the same level. Each virtual network, in
+> turn, provides new capabilities that are of value to some set of users,
+> applications, or higher-level networks.
 
 ## Peer-to-Peer Networks
 
