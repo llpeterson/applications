@@ -141,7 +141,7 @@ shows a screen shot of a (somewhat archaic) session directory tool
 called `sdr` along with the descriptions of several sessions that had
 been announced at the time the picture was taken.
 
-<figure class="line">
+<figure>
 	<a id="sdr"></a>
 	<img src="figures/f09-07-9780123850591.png" width="500px"/>
 	<figcaption>A session directory tool displays information extracted from
@@ -246,7 +246,7 @@ of as a point of contact for a user to which initial requests for
 communication with him are sent. Proxies also perform functions on
 behalf of callers. We can see how proxies work best through an example.
 
-<figure class="line">
+<figure>
 	<a id="sipproxy"></a>
 	<img src="figures/f09-08-9780123850591.png" width="600px"/>
 	<figcaption>Establishing communication through SIP proxies.</figcaption>
@@ -317,7 +317,7 @@ organization of codes is similar to that for HTTP. In
 [Figure 3](#sipeg) we can see a sequence of SIP messages and
 responses.
 
-<figure class="line">
+<figure>
 	<a id="sipeg"></a>
 	<img src="figures/f09-09-9780123850591.png" width="650px"/>
 	<figcaption>Message flow for a basic SIP session.</figcaption>
@@ -430,7 +430,7 @@ responsible for performing the appropriate translation of both
 signalling information and the media stream that need to be carried over
 the telephone network.
 
-<figure class="line">
+<figure>
 	<a id="h323"></a>
 	<img src="figures/f09-10-9780123850591.png" width="500px"/>
 	<figcaption>Devices in an H.323 network.</figcaption>
@@ -510,7 +510,7 @@ resource constrained) than the inbound, then resource allocation using
 DiffServ on that link may be enough to make all the difference in
 quality for latency- and loss-sensitive applications.
 
-<figure class="line">
+<figure>
 	<a id="ds-bb"></a>
 	<img src="figures/f09-11-9780123850591.png" width="500px"/>
 	<figcaption>Differentiated Services applied to a VOIP application.
@@ -573,7 +573,7 @@ get its packets marked appropriately and in the same queue as the
 existing VOIP traffic, can clearly drive the link to the point of
 overload with no feedback from the proxy or gatekeeper.
 
-<figure class="line">
+<figure>
 	<a id="cm-cac"></a>
 	<img src="figures/f09-12-9780123850591.png" width="500px"/>
 	<figcaption>Admission control using session control
@@ -602,7 +602,7 @@ described in this section. The one detail that still needs to be filled
 in is how the admission control protocol interacts with the session
 control protocol.
 
-<figure class="line">
+<figure>
 	<a id="sip-sync"></a>
 	<img src="figures/f09-13-9780123850591.png" width="500px"/>
 	<figcaption>Coordination of SIP signalling and resource

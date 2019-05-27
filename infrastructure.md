@@ -88,7 +88,7 @@ case of sending email) in [Figure 1](#names). While this picture makes
 the name resolution task look simple enough, there is a bit more to it,
 as we shall see.
 
-<figure class="line">
+<figure>
 	<a id="names"></a>
 	<img src="figures/f09-14-9780123850591.png" width="400px"/>
 	<figcaption>Names translated into addresses, where the numbers 1
@@ -110,7 +110,7 @@ to say that DNS maps domain names into values. For the time being, we
 assume that these values are IP addresses; we will come back to this
 issue later in this section.
 
-<figure class="line">
+<figure>
 	<a id="domains"></a>
 	<img src="figures/f09-15-9780123850591.png" width="700px"/>
 	<figcaption>Example of a domain hierarchy.</figcaption>
@@ -159,7 +159,7 @@ departments do not want the responsibility of managing the hierarchy
 the Department of Computer Science, manage their own department-level
 zone.
 
-<figure class="line">
+<figure>
 	<a id="zones"></a>
 	<img src="figures/f09-16-9780123850591.png" width="700px"/>
 	<figcaption>Domain hierarchy partitioned into zones.</figcaption>
@@ -178,7 +178,7 @@ accurate to think of DNS as being represented by a hierarchy of name
 servers rather than by a hierarchy of domains, as illustrated in
 [Figure 4](#servers).
 
-<figure class="line">
+<figure>
 	<a id="servers"></a>
 	<img src="figures/f09-17-9780123850591.png" width="500px"/>
 	<figcaption>Hierarchy of name servers.</figcaption>
@@ -374,7 +374,7 @@ program is configured with the local domain in which the host resides
 (e.g., `cs.princeton.edu`), and it appends this string to any simple
 names before sending out a query.
 
-<figure class="line">
+<figure>
 	<a id="resolution"></a>
 	<img src="figures/f09-18-9780123850591.png" width="600px"/>
 	<figcaption>Name resolution in practice, where the numbers 1 to 10 
@@ -567,7 +567,7 @@ able to declare their network-wide *intent*, with the mangement tool
 being smart enough to issue the necessary per-device configuration
 directives in a globally consistent way.
 
-<figure class="line">
+<figure>
 	<a id="mgmt"></a>
 	<img src="figures/apps/Slide1.png" width="400px"/>
 	<figcaption>Operator manages a network through a configuration and

@@ -19,7 +19,7 @@ specific server based on the requested URL. However, *overlay networks*
 are quickly emerging as the mechanism of choice for introducing new
 functionality into the Internet.
 
-<figure class="line">
+<figure>
 	<a id="overlay"></a>
 	<img src="figures/f09-19-9780123850591.png" width="300px"/>
 	<figcaption>Overlay network layered on top of a physical network.</figcaption>
@@ -39,7 +39,7 @@ nested, one on top of another. For example, all of the example overlay
 networks discussed in this section treat today's Internet as the
 underlying network.
 
-<figure class="line">
+<figure>
 	<a id="tunnel"></a>
 	<img src="figures/f09-20-9780123850591.png" width="500px"/>
 	<figcaption>Overlay nodes tunnel through physical nodes.</figcaption>
@@ -150,7 +150,7 @@ the group members.
 > But for the sake of completeness, the following describes the
 > approach in its full glory.
 
-<figure class="line">
+<figure>
 	<a id="topology"></a>
 	<img src="figures/f09-21-9780123850591.png" width="400px"/>
 	<figcaption>Alternative multicast trees mapped onto a physical
@@ -178,7 +178,7 @@ routers, however, the best one can hope for with end system multicast is
 a tree similar to the one shown in [Figure 3(d)](#topology). End system
 multicast defines an architecture for constructing this tree.
 
-<figure class="line">
+<figure>
 	<a id="layered-overlays"></a>
 	<img src="figures/f09-22-9780123850591.png" width="300px"/>
 	<figcaption>Multicast tree embedded in an overlay network.</figcaption>
@@ -298,7 +298,7 @@ the latencies from A to C and from C to B. That is, sometimes you would
 be better off indirectly sending your packets via some intermediate node
 than sending them directly to the destination.
 
-<figure class="line">
+<figure>
 	<a id="triangle"></a>
 	<img src="figures/f09-23-9780123850591.png" width="600px"/>
 	<figcaption>The triangle inequality does not necessarily hold in
@@ -420,7 +420,7 @@ of other machines that also run the Gnutella software. The relationship
 "A and B know each other" corresponds to the edges in this graph. (We'll
 talk about how this graph is formed in a moment.)
 
-<figure class="line">
+<figure>
 	<a id="gnutella"></a>
 	<img src="figures/f09-24-9780123850591.png" width="300px"/>
 	<figcaption>Example topology of a gnutella peer-to-peer
@@ -531,7 +531,7 @@ node that does not exist. There is also the not-so-small issue of
 translating the value returned by the hash function into an actual IP
 address.
 
-<figure class="line">
+<figure>
 	<a id="unitcircle"></a>
 	<img src="figures/f09-25-9780123850591.png" width="300px"/>
 	<figcaption>Both nodes and objects map (hash) onto the ID space, where objects are
@@ -566,7 +566,7 @@ fairly evenly across nodes, but, unlike ordinary hashing, only a small
 number of objects have to move when a node (hash bucket) joins or
 leaves.
 
-<figure class="line">
+<figure>
 	<a id="locate"></a>
 	<img src="figures/f09-26-9780123850591.png" width="300px"/>
 	<figcaption>Objects are located by routing through the
@@ -644,14 +644,14 @@ unspecified suffix. This figure shows the ID prefix matched by every
 entry in the table. It does not show the actual value contained in this
 entry—the IP address of the next node to route to.
 
-<figure class="line">
+<figure>
 	<a id="rt"></a>
 	<img src="figures/f09-27-9780123850591.png" width="500px"/>
 	<figcaption>Example routing table at the node with ID
 	65alc<i>x</i</figcaption>
 </figure>
 
-<figure class="line">
+<figure>
 	<a id="addnode"></a>
 	<img src="figures/f09-28-9780123850591.png" width="500px"/>
 	<figcaption>Adding a node to the network.</figcaption>
@@ -743,7 +743,7 @@ stay longer.) Other nodes join the swarm and begin downloading pieces
 from multiple peers, not just the original peer. See
 [Figure 11](#bitTorrentSwarm).
 
-<figure class="line">
+<figure>
 	<a id="bitTorrentSwarm"></a>
 	<img src="figures/f09-29-9780123850591.png" width="500px"/>
 	<figcaption>Peers in a BitTorrent swarm download from other peers
@@ -943,7 +943,7 @@ server for any content that either changes frequently (e.g., sports
 scores and stock quotes) or is produced as the result of some
 computation (e.g., a database query).
 
-<figure class="line">
+<figure>
 	<a id="cdn"></a>
 	<img src="figures/f09-30-9780123850591.png" width="600px"/>
 	<figcaption>Components in a Content Distribution Network

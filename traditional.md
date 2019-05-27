@@ -230,7 +230,7 @@ daemon. It turns out, though, that there are only a few popular
 implementations, with the old `sendmail` program from Berkeley Unix
 and `postfix` being the most widespread.
 
-<figure class="line">
+<figure>
 	<a id="mail"></a>
 	<img src="figures/f09-01-9780123850591.png" width="600px"/>
 	<figcaption>Sequence of mail gateways store and forward email
@@ -378,7 +378,7 @@ is one possible server response. Other common commands include and
 include `NO` (client does not have permission to perform that
 operation) and `BAD` (command is ill formed).
 
-<figure class="line">
+<figure>
 	<a id="imap"></a>
 	<img src="figures/f09-02-9780123850591.png" width="400px"/>
 	<figcaption>IMAP state transition diagram.</figcaption>
@@ -427,7 +427,7 @@ like Safari, Chrome, Firefox, or Internet Explorer.
 [Figure 3](#netscape) shows the Safari browser in use, displaying a
 page of information from Princeton University.
 
-<figure class="line">
+<figure>
 	<a id="netscape"></a>
 	<img src="figures/browser-screenshot.png" width="600px"/>
 	<figcaption>The Safari web browser.</figcaption>
@@ -531,7 +531,9 @@ much mischief (including spam) on the Internet.
 | TRACE | Loopback request message |
 | CONNECT | For use by proxies |
 
-{% center %} *Table 1. HTTP Request Operations.*  {% endcenter %}
+<table>
+<caption>Table 1. HTTP Request Operations.</caption>
+</table>
 
 For example, the `START_LINE`
 
@@ -588,7 +590,9 @@ summarizes the five types of codes.
 | 4xx | Client Error | request contains bad syntax or cannot be fulfilled |
 | 5xx | Server Error | server failed to fulfill an apparently valid request |
 
-{% center %} *Table 2. Five Types of HTTP Result Codes.* {% endcenter %}
+<table>
+<caption>Table 2. Five Types of HTTP Result Codes.</caption>
+</table>
 
 As with the unexpected consequences of the `POST` request message, it
 is sometimes surprising how various response messages are used in
@@ -660,7 +664,7 @@ getting the page and image. As well as the latency impact, there is also
 processing cost on the server to handle the extra TCP connection
 establishment and termination.
 
-<figure class="line">
+<figure>
 	<a id="oldhttp"></a>
 	<img src="figures/f09-04-9780123850591.png" width="500px"/>
 	<figcaption>HTTP 1.0 behavior.</figcaption>
@@ -681,7 +685,7 @@ each page. [Figure 5](#persist) shows the transaction from
 the connection is already open (presumably due to some prior access of
 the same server).
 
-<figure class="line">
+<figure>
 	<a id="persist"></a>
 	<img src="figures/f09-05-9780123850591.png" width="500px"/>
 	<figcaption>HTTP 1.1 behavior with persistent connections.</figcaption>
@@ -1021,7 +1025,7 @@ that contains header blocks, and a Body, which contains the payload
 destined for the ultimate receiver. This message structure is
 illustrated in [Figure 6](#soapFormat).
 
-<figure class="line">
+<figure>
 	<a id="soapFormat"></a>
 	<img src="figures/f09-06-9780123850591.png" width="250px"/>
 	<figcaption>SOAP message structure.</figcaption>
