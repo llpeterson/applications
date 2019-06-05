@@ -518,7 +518,10 @@ fetched it. The full set of operations is summarized in
 [Table 1](#ops). As innocent as it sounds, the `POST` command enables
 much mischief (including spam) on the Internet.
 
+<table>
 <a id="ops"></a>
+<tabcaption>HTTP Request Operations.</tabcaption>
+</table>
 
 | Operation | Description |
 |--------:|:---------|
@@ -531,9 +534,6 @@ much mischief (including spam) on the Internet.
 | TRACE | Loopback request message |
 | CONNECT | For use by proxies |
 
-<table>
-<caption>Table 1. HTTP Request Operations.</caption>
-</table>
 
 For example, the `START_LINE`
 
@@ -580,7 +580,10 @@ was not found. There are five general types of response codes, with the
 first digit of the code indicating its type. [Table 2](#codes)
 summarizes the five types of codes.
 
+<table>
 <a id="codes"></a>
+<tabcaption>Five Types of HTTP Result Codes.</tabcaption>
+</table>
 
 | Code | Type | Example Reasons |
 |:----:|:----:|:--------------|
@@ -589,10 +592,6 @@ summarizes the five types of codes.
 | 3xx | Redirection | further action must be taken to complete the request |
 | 4xx | Client Error | request contains bad syntax or cannot be fulfilled |
 | 5xx | Server Error | server failed to fulfill an apparently valid request |
-
-<table>
-<caption>Table 2. Five Types of HTTP Result Codes.</caption>
-</table>
 
 As with the unexpected consequences of the `POST` request message, it
 is sometimes surprising how various response messages are used in
