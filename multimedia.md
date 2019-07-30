@@ -465,7 +465,7 @@ resource allocation capabilities of the network?
 
 It is worth noting that many multimedia applications run successfully
 over "best-effort" networks, such as the public Internet. The wide array
-of commercial VOIP services (such as Skype) are testimony to the fact
+of commercial VOIP services (such as Skype) are a testimony to the fact
 that you only have to worry about resource allocation when resources are
 not abundant—and in many parts of today's Internet, resource abundance
 is the norm.

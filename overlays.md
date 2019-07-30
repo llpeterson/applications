@@ -154,7 +154,7 @@ the group members.
 	<a id="topology"></a>
 	<img src="figures/f09-21-9780123850591.png" width="400px"/>
 	<figcaption>Alternative multicast trees mapped onto a physical
-	toploogy.</figcaption>
+	topology.</figcaption>
 </figure>
 
 Since we take the underlying Internet to be fully connected, a naive
@@ -331,7 +331,7 @@ probability—between every pair of sites. It was then able to both
 select the optimal route between any pair of nodes, and rapidly change
 routes should network conditions change. Experience showed that RON
 was able to deliver modest performance improvements to applications,
-but more importantly, it recoverd from network failures much more quickly.
+but more importantly, it recovered from network failures much more quickly.
 For example, during one 64-hour period in 2001, an instance of RON
 running on 12 nodes detected 32 outages lasting over 30 minutes, and it
 was able to recover from all of them in less than 20 seconds on average.
@@ -354,7 +354,11 @@ paths swamp the network, and does anyone see improved behavior when
 many RONs compete for the same paths? These questions are still
 unanswered.
 
+{% if output.name == "ebook" %}
+> **Key Takeaway**
+{% else %}
 > [!Note|style:flat|label:Key Takeaway|iconVisibility:hidden]
+{% endif %}
 > All of these overlays illustrate a concept that is central to computer
 > networks in general: *virtualization*. That is, it is possible to build
 > a virtual network from abstract (logical) resources on top of a physical
@@ -648,7 +652,7 @@ entry—the IP address of the next node to route to.
 	<a id="rt"></a>
 	<img src="figures/f09-27-9780123850591.png" width="500px"/>
 	<figcaption>Example routing table at the node with ID
-	65alc<i>x</i</figcaption>
+	65alcx</figcaption>
 </figure>
 
 <figure>

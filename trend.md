@@ -66,6 +66,10 @@ where access networks are anchored) and the economies-of-scale drive
 the hardware devices used to build Internet/Cloud sites increasingly
 towards commonality.
 
+{% if output.name == "ebook" %}
+> **Broader Perspective**
+{% else %}
 > [!NOTE|label:Broader Perspective]
+{% endif %}
 > To remind yourself of why the cloudification of the Internet is
 > important, see [Feature Velocity](../foundation/trend.md). 

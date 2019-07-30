@@ -732,7 +732,7 @@ connection—by permitting these requests to overlap with each
 other. The way HTTP/2 does this should sound familiar: it defines a
 *channel* abstraction (technically, the channels are called
 *streams*), permits multiple concurrent streams to be active at a
-given time (each labled with a unique *stream id*), and limits each
+given time (each labeled with a unique *stream id*), and limits each
 stream to one active request/reply exchange at a time.
 
 ### Caching
@@ -1048,7 +1048,7 @@ specifications. If your protocol is required to have at-most-once
 semantics and authentication, include the corresponding modules in your
 specification. This represents a novel approach to modularizing protocol
 services, an alternative to the protocol layering we have seen
-throughout this book. It is bit like flattening a series of protocol
+throughout this book. It is a bit like flattening a series of protocol
 layers into a single protocol, but in a structured way. It remains to be
 seen how well SOAP features and modules, introduced in version 1.2 of
 SOAP, will work in practice. The main weakness of this scheme is that
@@ -1094,7 +1094,7 @@ The *WS-I Basic Security Profile* adds security constraints to the Basic
 Profile by specifying how the SSL/TLS layer is to be used and requiring
 conformance to *WS-Security* (Web Services Security). WS-Security
 specifies how to use various existing techniques such as X.509 public
-key certificatesand Kerberos to provide security features in SOAP
+key certificates and Kerberos to provide security features in SOAP
 protocols.
 
 WS-Security is just the first of a growing suite
@@ -1145,7 +1145,7 @@ protocol in this architecture consists of defining the document
 structure (i.e., the state representation). XML and the lighter-weight
 JavaScript Object Notation (JSON) are the most frequently used
 presentation languages for this state. Interoperability depends on
-agreement, between a Web Service and its client, on the state
+agreement, between a Web Service and its clients, on the state
 representation. Of course, the same is true in the SOAP architecture; a
 Web Service and its client have to be in agreement on payload format.
 The difference is that in the SOAP architecture interoperability

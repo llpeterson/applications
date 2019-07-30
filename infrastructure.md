@@ -68,7 +68,7 @@ and returned the corresponding address.
 
 > Believe it or not, there was also a paper book (like a phone book)
 > published periodically that listed all the machines connected to the
-> Internet and all people that had an Internet email account.
+> Internet and all the people that had an Internet email account.
 
 It should come as no surprise that the approach to naming did not work
 well as the number of hosts in the Internet started to grow. Therefore,
@@ -381,7 +381,11 @@ names before sending out a query.
 	show the sequence of steps in the process.</figcaption>
 </figure>
 
+{% if output.name == "ebook" %}
+> **Key Takeaway**
+{% else %}
 > [!Note|style:flat|label:Key Takeaway|iconVisibility:hidden]
+{% endif %}
 > Just to make sure we are clear, we have now seen three different levels
 > of identifiers—domain names, IP addresses, and physical network
 > addresses—and the mapping of identifiers at one level into identifiers
@@ -504,7 +508,7 @@ fetch. Second, we need a precise representation for the values returned
 by the server. Both problems are addressed using Abstract Syntax
 Notation One (ASN.1).
 
-Consider the second problem first. As we already saw in in a previous
+Consider the second problem first. As we already saw in a previous
 chapter, ASN.1/Basic Encoding Rules (BER) defines a representation for
 different data types, such as integers. The MIB defines the type of each
 variable, and then it uses ASN.1/BER to encode the value contained in
@@ -551,11 +555,11 @@ possible, with the goal of getting the error-prone human out of the
 loop. This is sometimes called *zero-touch* management, and it
 implies two things have to happen. First, whereas historically
 operators used tools like SNMP to *monitor* the network, but had
-to log into any mishaving network device and use a command line
+to log into any misbehaving network device and use a command line
 interface (CLI) to fix the problem, zero-touch management implies that
-we also need to *configure* the network programatically. In other
+we also need to *configure* the network programmatically. In other
 words, network management is equal parts reading status information
-and writing configuation information. The goal is to build a closed
+and writing configuration information. The goal is to build a closed
 control loop, although there will always be scenarios where the
 operator has to be alerted that manual intervention is required.
 
@@ -563,7 +567,7 @@ Second, whereas historically the operator had to configure each
 network device individually, all the devices have to be configured in
 a consistent way if they are going to function correctly as a network.
 As a consequence, zero-touch also implies that the operator should be
-able to declare their network-wide *intent*, with the mangement tool
+able to declare their network-wide *intent*, with the management tool
 being smart enough to issue the necessary per-device configuration
 directives in a globally consistent way.
 
@@ -571,7 +575,7 @@ directives in a globally consistent way.
 	<a id="mgmt"></a>
 	<img src="figures/apps/Slide1.png" width="400px"/>
 	<figcaption>Operator manages a network through a configuration and
-	managment tool, which in turn programmatically interacts with the
+	management tool, which in turn programmatically interacts with the
 	underlying network devices (e.g., using gNMI as the transport
 	protocol and YANG to specify the schema for the data being
 	exchanged).</figcaption>
@@ -637,13 +641,13 @@ serve a need and support more features than the alternatives, there is
 still much room for innovation in tools for network management.
 
 > For completeness, we note that NETCONF is another of the post-SNMP
-> protocols for communicating configuation information to network
+> protocols for communicating configuration information to network
 > devices. OpenConfig works with NETCONF, but our reading of the
 > tea leaves points to gNMI as the future.
 
 We conclude by emphasizing that a seachange is underway. While
 listing SNMP and OpenConfig in the title to this section suggests
-they are equivalent, its more accurate to say that each is "what we
+they are equivalent, it is more accurate to say that each is "what we
 call" these two approaches, but the approaches are quite different.
 On the one hand, SNMP is really just a transport protocol, analogous
 to gNMI in the OpenConfig world. It historically enabled monitoring
@@ -652,7 +656,7 @@ devices, but had virtually nothing to say about configuring devices.
 other hand, OpenConfig is primarily an effort to define a common set
 of data models for network devices, roughly similar to the role MIB
 plays in the SNMP world, except OpenConfig is (1) model-based, using
-YANG, and (2) equally focused on monitoring and configuation.
+YANG, and (2) equally focused on monitoring and configuration.
 
 
 
