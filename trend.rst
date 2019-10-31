@@ -1,16 +1,17 @@
 Perspective: The Cloud is the New Internet
 ==========================================
 
-As we saw at the end of `Section 9.1 <traditional.html>`__, there has been
-a migration of traditional Internet applications like email and web
-servers from machines running on-premises to VMs running in commodity
-clouds. This corresponds to a shift in terminology (from “Web Services”
-to “Cloud Services”) and in many of the underlying technologies being
-used (from Virtual Machines to Cloud Native micro-services). But the
-Cloud’s impact on how network applications are implemented today is even
-bigger than this migration suggests. It is the combination of commodity
-clouds and overlay networks (similar to those described in `Section
-9.4 <overlays.html>`) that may eventually have the most impact.
+As we saw at the end of `Section 9.1 <traditional.html>`__, there has
+been a migration of traditional Internet applications like email and
+web servers from machines running on-premises to VMs running in
+commodity clouds. This corresponds to a shift in terminology (from
+“Web Services” to “Cloud Services”) and in many of the underlying
+technologies being used (from Virtual Machines to Cloud Native
+micro-services). But the Cloud’s impact on how network applications
+are implemented today is even bigger than this migration suggests. It
+is the combination of commodity clouds and overlay networks (similar
+to those described in `Section 9.4 <overlays.html>`__) that may
+eventually have the most impact.
 
 The biggest thing an overlay-based application needs to be effective is
 a wide footprint, that is, many points-of-presence around the world. IP
