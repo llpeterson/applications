@@ -554,7 +554,7 @@ the Internet.
 
 For example, the ``START_LINE``
 
-.. code-block:: http
+::
 
    GET http://www.cs.princeton.edu/index.html
    HTTP/1.1
