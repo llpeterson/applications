@@ -1141,19 +1141,20 @@ happen to be primarily hosted on busy servers. At the same time, if some
 pages become extremely popular, it is conceivable that all of the
 servers in the system could be responsible for serving them.
 
-Finally, it is possible to introduce network proximity into the equation
-in at least two different ways. The first is to blur the distinction
-between server load and network proximity by monitoring how long a
-server takes to respond to requests and using this measurement as the
-“server load” parameter in the preceding algorithm. This strategy tends
-to prefer loaded servers over distant/heavily loaded servers. A second
-approach is to factor proximity into the decision at an earlier stage by
-limiting the candidate set of servers considered by the above algorithms
-(*S*) to only those that are nearby. The harder problem is deciding
-which of the potentially many servers are suitably close. One approach
-would be to select only those servers that are available on the same ISP
-as the client. A slightly more sophisticated approach would be to look
-at the map of autonomous systems produced by BGP and select only those
-servers within some number of hops from the client as candidate servers.
-Finding the right balance between network proximity and server cache
-locality is a subject of ongoing research.
+Finally, it is possible to introduce network proximity into the
+equation in at least two different ways. The first is to blur the
+distinction between server load and network proximity by monitoring
+how long a server takes to respond to requests and using this
+measurement as the “server load” parameter in the preceding
+algorithm. This strategy tends to prefer nearby/lightly loaded servers
+over distant/heavily loaded servers. A second approach is to factor
+proximity into the decision at an earlier stage by limiting the
+candidate set of servers considered by the above algorithms (*S*) to
+only those that are nearby. The harder problem is deciding which of
+the potentially many servers are suitably close. One approach would be
+to select only those servers that are available on the same ISP as the
+client. A slightly more sophisticated approach would be to look at the
+map of autonomous systems produced by BGP and select only those
+servers within some number of hops from the client as candidate
+servers.  Finding the right balance between network proximity and
+server cache locality is a subject of ongoing research.
